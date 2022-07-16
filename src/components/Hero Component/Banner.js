@@ -1,12 +1,17 @@
 import Header from "../Header";
 import "./Banner.scss";
+import SearchBar from "./SearchBar";
 
 function Banner() {
   return (
     <div className="Banner">
       <Header />
 
+      <SearchBar />
+
       <h2>CEBU</h2>
+
+      
 
       <div class="wave">
         <svg

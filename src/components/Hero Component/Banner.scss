@@ -4,10 +4,21 @@
     background-size: cover;
     background-position: top center;
     color: white;
+    overflow: hidden;
+    position: relative;
+
+    animation: move 40s ease;
+
+  
+    -ms-animation: move 40s ease;
+    -webkit-animation: move 40s ease;
+     -o-animation: move 40s ease;
+    -moz-animation: move 40s ease;
+
 
     & h2{
 
-        margin: 280px 110px;
+        margin: 100px 110px;
         font-size: 80px;
         text-align: right;
         color: rgba(255, 255, 255, 0.76)
@@ -35,6 +46,9 @@
     & .shape-fill {
         fill: #FFFFFF;
     }
+
+
+    
 
 }
 
