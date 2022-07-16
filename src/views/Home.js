@@ -1,5 +1,5 @@
 
-import Banner from "../components/Hero Component/Banner";
+import Banner from "../components/Home Component/Banner";
 
 function Home() {
   return (

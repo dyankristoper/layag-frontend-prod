@@ -1,0 +1,67 @@
+
+.form-container {
+  
+position: relative;
+margin-top: 100px;
+width: 450px;
+height: auto;
+background: rgb(208, 215, 223);
+border-radius: 5px;
+  
+    .login-form {
+    padding: 20px 40px  ;
+  
+  
+    &_label{
+      
+      padding: 20px;
+      font-size: 35px;
+      font-weight: bold;
+      color: #130f40;
+      text-align: center;
+    }
+
+    &_email {
+      padding: 20px;
+
+      label {
+        font-size: 18px;
+        color: #130f40;
+        margin: 5px 0;
+      }
+
+    }
+
+    &_password {
+
+      label {
+        font-size: 18px;
+        color: #130f40;
+        margin: 5px 0;
+      }
+    }
+
+    &_btn {
+      margin: 45px 0 30px 0;
+      height: 45px;
+      width: 365px;
+      font-size: 20px;
+      color: white;
+      outline: none;
+      cursor: pointer;
+      font-weight: bold;
+      background: #1A237E;
+      border-radius: 3px;
+      border: 1px solid #3949AB;
+      transition: .5s;
+    }
+  }
+  
+
+}
+
+
+
+
+
+
