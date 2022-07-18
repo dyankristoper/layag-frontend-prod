@@ -120,7 +120,7 @@ const SearchBar = () => {
           <label> Travelers </label>
           <div className="searchForm__guest"  onClick ={ e=> setGuest(true) } >
             <img src="https://cdn-icons-png.flaticon.com/512/681/681443.png" alt ="guest"/>
-            <input type="text"  placeholder="Add People" readOnly/>
+            <input type="text"  value={`${adult + child} Travellers`}placeholder="Add People" readOnly/>
             <img className="image2"src="https://cdn-icons-png.flaticon.com/512/32/32195.png" alt="dropdown" />
           </div>
         </div>
