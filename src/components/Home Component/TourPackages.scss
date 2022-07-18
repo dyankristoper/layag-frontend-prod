@@ -1,8 +1,17 @@
 @import '../global';
 
+.Tours-title {
+    text-align: center;
+    font-size: 4rem;
+    font-family: $primary-font;
+    font-weight: bold;
+
+}
+
 .Tours {
 
     @include flex(row, wrap, center, center);
+    margin-top: 50px;
 
     .TourPackages {
         cursor: pointer;
@@ -23,6 +32,7 @@
 
                 border-radius: 20px;
                 height: 400px;
+                width: 100%;
 
 
             }
@@ -70,6 +80,13 @@
         }
 
     }
+
+    .TourPackages:hover {
+        border: 2px solid black;
+        box-shadow: 2px 4px black;
+
+    }
+
 
     .stars {
         position: relative;
