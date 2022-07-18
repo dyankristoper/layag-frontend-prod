@@ -1,59 +1,98 @@
 @import '../global';
 
-.TourPackages{
+.Tours {
 
-    margin-top:100px;
-    text-align: center;
+    @include flex(row, wrap, center, center);
 
-    & h2{
-        font-size: 3rem;
-    }
+    .TourPackages {
+        cursor: pointer;
+        border-radius: 20px;
+        background-color: rgb(255, 255, 255);
+        width: 300px;
+        margin-bottom: 20px;
+        @include flex(column, nowrap, center, center);
+        border: 1px solid rgb(208, 208, 208);
+        font-family: $primary-font;
+        margin: 80px 50px;
+        box-shadow: 2px 4px #d0d0d0;
 
-    &__list{
+        &-img {
 
-        & .tour-card{
-            border: 0.5px solid rgb(231, 231, 231);
-            border-radius: 20px 20px 0 0;
-            width:400px;
-            height: 500px;
-            margin: 20px auto;
+            img {
 
-            & img{
-                width:400px;
-                border-radius: 20px 20px 0 0;
-            }
 
-            & h3{
-                margin: 0;
-                padding: 0;
-                font-size: 1.3rem;
-            }
+                border-radius: 20px;
+                height: 400px;
 
-            &__details{
-                @include flex(row,wrap, center,center);
-                padding: 0px 20px;
-                margin-top: 30px;
-
-                & .information{
-
-                  @include flex(row, nowrap, center,center);
-                  width: 40%;
-                  padding: 0px 10px;
-
-                    & p{
-                        font-size: 13px;
-                    }
-                
-                    & img{
-                        display: inline-block;
-                        width: 30px;
-                    }
-
-                }
-                
 
             }
         }
+
+        &-list {
+
+
+            padding: 20px;
+
+            h3 {
+                color: #2B65EC;
+                margin-bottom: 15px;
+
+            }
+
+            &__rate {
+                color: #f18a23;
+            }
+
+            &__location {
+                color: #646D7E;
+                margin: 10px 0;
+            }
+
+            &__review {
+                color: rgb(144, 144, 144);
+                font-size: .7rem;
+                margin-left: 12px;
+            }
+
+            h5 {
+                text-transform: uppercase;
+                letter-spacing: 2.5px;
+
+            }
+
+            &__description {
+                font-size: .9rem;
+                margin-top: 20px;
+                color: #646D7E;
+
+            }
+
+        }
+
+    }
+
+    .stars {
+        position: relative;
+
+        white-space: nowrap;
+
+        svg {
+            width: 20px
+        }
+    }
+
+    .cover {
+        background: white;
+        height: 100%;
+        overflow: hidden;
+        mix-blend-mode: color;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    svg {
+        fill: #f2b91f;
     }
 
 }
