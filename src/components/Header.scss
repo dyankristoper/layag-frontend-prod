@@ -1,26 +1,27 @@
 @import './global';
 
-.Header{
+.Header {
     @include flex(row, nowrap, space-evenly, center);
     color: white;
     padding: 20px 0;
 
-    &__logoTitle{
+
+    &__logoTitle {
         @include flex(row, nowrap, center, center);
-        
-        & h1{
+
+        & h1 {
             font-size: 3rem;
         }
 
-        & img{
+        & img {
             width: 45px;
         }
     }
 
-    &__nav{
+    &__nav {
         margin-top: 15px;
-      
-       & ul{
+
+        & ul {
             @include flex(row, nowrap, center, center);
             list-style-type: none;
             gap: 30px;
@@ -29,10 +30,11 @@
             margin-right: 25px;
 
 
-            & a{
+            & a {
                 color: white;
                 text-decoration: none;
-                &:hover{
+
+                &:hover {
                     color: rgb(107, 223, 103);
                     font-weight: bolder;
                 }
@@ -41,14 +43,17 @@
 
 
 
-    
+
     }
 
-    &__userSection{
-        
-        & img{
+    &__userSection {
+
+        cursor: pointer;
+
+        & img {
             width: 30px;
             padding-inline: 5px;
+
         }
-     }
+    }
 }
