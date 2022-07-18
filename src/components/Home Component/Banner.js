@@ -2,7 +2,7 @@ import Header from "../Header";
 import "./Banner.scss";
 import SearchBar from "./SearchBar";
 
-function Banner() {
+const Banner = () => {
   return (
     <div className="Banner">
       <Header />
@@ -11,7 +11,7 @@ function Banner() {
 
       <h2>CEBU</h2>
 
-      
+
 
       <div class="wave">
         <svg
