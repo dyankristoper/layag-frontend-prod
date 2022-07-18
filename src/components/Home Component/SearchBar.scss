@@ -1,0 +1,180 @@
+@import '../global';
+
+.SearchBar{
+    text-align: center;
+    margin-top: 130px;
+    position: relative;
+
+    & h3{
+        font-size:3rem; 
+    }
+
+    &__modal{
+        width: 250px;
+        height: 150px;
+        background-color: white;
+        @include flex(column, nowrap, center, center);
+        position: absolute;
+        right: 0;
+        margin-right:620px;
+        margin-top:10px;
+
+        & img{
+            width: 30px;
+            cursor: pointer;
+        }
+
+        & p{
+            color: black;
+        }
+
+        & .people{
+            @include flex(row, nowrap, center, center);
+            gap: 10px;
+        }
+    }
+
+    &__options{
+        @include flex(row, wrap, center,center);
+        background-color: rgb(17, 76, 134);
+        width: 50%;
+        padding: 20px 0;
+        margin: -20px auto;
+        gap:10px;
+
+        
+            & label{
+                font-size: 1.3rem;
+                color: white;
+            }
+
+            & button{
+                margin-top:20px;
+                height: 30px;
+                width: 100px;
+                border-radius: 3px;
+                border: none;
+                background-color: rgb(4, 122, 23);
+                color: white;
+                font-weight: bold;
+            }
+
+        & .searchForm{
+            @include flex(column, nowrap, flex-start ,flex-start );
+            gap: 5px;
+
+
+            
+            & label{
+                font-size: 1.3rem;
+                color: white;
+            }
+
+            & button{
+                height: 45px;
+                width: 100px;
+                margin-top:28px;
+                border-radius: 3px;
+                border: none;
+                background-color: rgb(4, 122, 23);
+                color: white;
+                font-weight: bold;
+            }
+
+            &__text{
+
+                width: 250px;
+                height: 40px;
+                background-color: white;
+                @include flex(row,nowrap,center,center);
+                gap:5px;
+
+                & img{
+                    width: 25px;
+                    margin-left: -20px;
+                }
+
+                & input{
+                    display: inline-block;
+                    height: 30px;
+                    border: none;
+                    text-decoration: none;
+                    background-color: transparent;
+                    outline: none;
+                   
+                }
+
+              
+
+            }
+
+
+
+            &__guest{
+                width: 250px;
+                height: 40px;
+                background-color: white;
+                @include flex(row,nowrap,space-between,center);
+                cursor: pointer;
+
+                & img{
+                    width: 25px;
+                    padding-left: 10px;
+                }
+
+                & .image2{
+                    width: 15px;
+                    padding-right: 10px;
+                }
+
+                & p{
+                    color: rgb(128, 128, 128);
+                    font-size: 15px;
+                    margin-left: -80px;
+                    
+                }
+            }
+
+            &__date{
+                width: 250px;
+                height: 40px;
+                background-color: white;
+                @include flex(row,nowrap,flex-start,center);
+
+                & .arrival{
+                @include flex(row,nowrap,flex-start,center);
+                    & img{
+                        width: 25px;
+                        padding-left: 10px;
+                        cursor: pointer;
+                        
+                    }
+    
+                    & input{
+                        height: 30px;
+                        width: 60px;
+                        padding-left: 10px;
+                        border: none;
+                        text-decoration: none;
+                        background-color: transparent;
+                        outline: none;
+                        cursor: pointer;
+    
+                    }
+                }
+                
+                & p{
+                    color:black;
+                }
+
+
+            }
+
+
+        }
+
+    }
+
+    
+
+}
