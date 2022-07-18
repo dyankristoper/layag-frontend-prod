@@ -1,0 +1,54 @@
+@import './global';
+
+.Header{
+    @include flex(row, nowrap, space-evenly, center);
+    color: white;
+    padding: 20px 0;
+
+    &__logoTitle{
+        @include flex(row, nowrap, center, center);
+        
+        & h1{
+            font-size: 3rem;
+        }
+
+        & img{
+            width: 45px;
+        }
+    }
+
+    &__nav{
+        margin-top: 15px;
+      
+       & ul{
+            @include flex(row, nowrap, center, center);
+            list-style-type: none;
+            gap: 30px;
+            font-size: 1.3rem;
+            padding: 0;
+            margin-right: 25px;
+
+
+            & a{
+                color: white;
+                text-decoration: none;
+                &:hover{
+                    color: rgb(107, 223, 103);
+                    font-weight: bolder;
+                }
+            }
+        }
+
+
+
+    
+    }
+
+    &__userSection{
+        
+        & img{
+            width: 30px;
+            padding-inline: 5px;
+        }
+     }
+}

@@ -1,0 +1,59 @@
+@import '../global';
+
+.TourPackages{
+
+    margin-top:100px;
+    text-align: center;
+
+    & h2{
+        font-size: 3rem;
+    }
+
+    &__list{
+
+        & .tour-card{
+            border: 0.5px solid rgb(231, 231, 231);
+            border-radius: 20px 20px 0 0;
+            width:400px;
+            height: 500px;
+            margin: 20px auto;
+
+            & img{
+                width:400px;
+                border-radius: 20px 20px 0 0;
+            }
+
+            & h3{
+                margin: 0;
+                padding: 0;
+                font-size: 1.3rem;
+            }
+
+            &__details{
+                @include flex(row,wrap, center,center);
+                padding: 0px 20px;
+                margin-top: 30px;
+
+                & .information{
+
+                  @include flex(row, nowrap, center,center);
+                  width: 40%;
+                  padding: 0px 10px;
+
+                    & p{
+                        font-size: 13px;
+                    }
+                
+                    & img{
+                        display: inline-block;
+                        width: 30px;
+                    }
+
+                }
+                
+
+            }
+        }
+    }
+
+}
