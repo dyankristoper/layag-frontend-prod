@@ -1,25 +1,26 @@
 @import '../global';
 
+
+h2 {
+    text-align: center;
+    font-size: 3rem;
+    margin-top: 100px;
+    font-family: $primary-font;
+
+    span {
+        color: #2B65EC;
+    }
+}
+
 .TopTours {
     font-family: $primary-font;
 
-    margin-top: 6rem;
-
     height: 500px;
 
-    margin: 6rem 0;
+
 
     @include flex(column, nowrap, center, center);
 
-
-    & h2 {
-        text-align: center;
-        font-size: 3rem;
-
-        span {
-            color: #2B65EC;
-        }
-    }
 
     &__list {
         @include flex(row, wrap, center, center);
