@@ -16,7 +16,7 @@ const Login = () => {
         <input className="login-information__input" type="password" placeholder="Enter your password" />
         <p className="login-information__details">Forgot password?</p>
         <button type="button" className="login-information__btn"> Proceed </button>
-        <p>Don't have an account?<span>Sign up</span></p>
+        <p>Don't have an account? <Link to="/signup"><span>Sign up</span></Link></p>
         <p className="login-information__copyright">All images and information is for educational background purposes only © 2022</p>
       </div>
       <div className="login-image">
