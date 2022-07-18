@@ -127,10 +127,12 @@
                     padding-right: 10px;
                 }
 
-                & p{
-                    color: rgb(128, 128, 128);
-                    font-size: 15px;
-                    margin-left: -80px;
+                & input{
+                    border: none;
+                        text-decoration: none;
+                        background-color: transparent;
+                        outline: none;
+                        cursor: pointer;
                     
                 }
             }
@@ -158,6 +160,7 @@
                         text-decoration: none;
                         background-color: transparent;
                         outline: none;
+                        color: gray;
                         cursor: pointer;
     
                     }
@@ -174,6 +177,20 @@
         }
 
     }
+
+    & .calendarWrap {
+        display: inline-block;
+        position: relative;
+      }
+      
+    & .calendarElement {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 0px;
+        border: 1px solid #ccc;
+        z-index: 999;
+      }
 
     
 
