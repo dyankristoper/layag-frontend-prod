@@ -3,12 +3,12 @@ import './TopTours.scss';
 function TopTours() {
     return (
         <div className="TopTours">
-            <h2> Top Tours In the Philipphines</h2>
+            <h2> Top Tours In the <span>Philippines</span></h2>
 
             <div className="TopTours__list">
                 <div className='entry'>
                     <img className="entry__image" src="https://www.leeabbamonte.com/wp-content/uploads/2015/02/IMG_1291-1024x1024.jpg" alt="Puerto Princessa" />
-                    <h3>Peurto Princessa</h3>
+                    <h3>Puerto Prinsesa</h3>
                 </div>
 
                 <div className='entry'>
