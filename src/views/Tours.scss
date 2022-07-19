@@ -1,0 +1,11 @@
+.Tour{
+    background-color: rgb(239, 252, 251);
+
+    &__hero{
+        width: 60vw;
+        height: 70vh;
+        background: url("https://sugbo.ph/wp-content/uploads/2018/10/cebuoslobtourguide.jpg");
+        background-size: cover;
+        margin: auto;
+    }
+}
