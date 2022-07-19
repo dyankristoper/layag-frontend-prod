@@ -1,9 +1,9 @@
 @import './global';
 
 .Header {
-    @include flex(row, nowrap, space-evenly, center);
+    @include flex(row, nowrap, space-between, center);
     color: white;
-    padding: 20px 0;
+    padding: 20px 18%;
 
 
     &__logoTitle {
@@ -14,7 +14,7 @@
         }
 
         & img {
-            width: 45px;
+            width: 70px;
         }
     }
 
@@ -47,13 +47,12 @@
     }
 
     &__userSection {
-
+        @include flex(row,nowrap,center,center);
         cursor: pointer;
+        gap:15px;
 
         & img {
             width: 30px;
-            padding-inline: 5px;
-
         }
     }
 }
