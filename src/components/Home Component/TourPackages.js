@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 
 const TourPackages = () => {
 
-  const [tours, setTours] = useState({});
+  const [tours, setTours] = useState([]);
 
   useEffect(() => {
     const fetchItems = async () => {
