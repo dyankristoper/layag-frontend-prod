@@ -4,6 +4,7 @@ import Home from "./views/Home";
 import Login from "./views/Login"
 import SignUp from "./views/SignUp";
 import { Routes, Route } from 'react-router-dom'
+import Tour from "./views/Tour";
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/destination/:id" element={<Tour />} />
       </Routes>
 
     </div>
