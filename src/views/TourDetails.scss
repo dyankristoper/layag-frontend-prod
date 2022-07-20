@@ -55,7 +55,8 @@
     }
 
     &__documentation {
-      @include flex(row, nowrap, center, center) width: 100%;
+      @include flex(row, nowrap, center, center);
+      width: 100%;
       height: 65vh;
       // background-color: gray;
 

@@ -12,7 +12,9 @@ import axios from 'axios'
 const TourDetails = () => {
 
   const [tour, setTour] = useState([]);
-  const [tourLocation, setTourLocation] = useState([]);
+  const [tourStartingLocation, setTourStartingLocation] = useState();
+  const [tourEndingLocation, setTourEndingLocation] = useState();
+  const [tourImages, setTourImages] = useState([]);
   const { id } = useParams();
 
   useEffect(() => {
@@ -20,7 +22,12 @@ const TourDetails = () => {
       try {
         const response = await axios.get(`http://localhost:8000/api/v1/tours/${id}`)
         setTour(response.data.data.tour)
-        setTourLocation(tour.locations)
+        const start = response.data.data.tour.locations[0].name;
+        const end = response.data.data.tour.locations;
+        const images = response.data.data.tour.images;
+        setTourStartingLocation(start)
+        setTourEndingLocation(end[end.length - 1].name)
+        setTourImages(images);
 
 
       } catch (error) {
@@ -31,7 +38,9 @@ const TourDetails = () => {
     fetchItems();
   }, [id])
   console.log(tour)
-  console.log(tourLocation)
+  console.log(tourStartingLocation)
+  console.log(tourEndingLocation)
+  console.log(tourImages);
 
 
 
@@ -47,13 +56,13 @@ const TourDetails = () => {
         <div className="Tour-Details">
           <div className="Tour-Details__images">
             <div className="Tour__image">
-              <img src="https://images.unsplash.com/photo-1555590858-be28a58c2688?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="image" />
+              <img src={tourImages[0]} alt="image" />
             </div>
             <div className="Tour__images">
-              <div><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/cd/a6/28/daraga-church-our-lady.jpg?w=1200&h=-1&s=1" alt="image1" /></div>
-              <div><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/cd/a6/28/daraga-church-our-lady.jpg?w=1200&h=-1&s=1" alt="image2" /></div>
-              <div><img src="https://upload.wikimedia.org/wikipedia/commons/6/65/Albay_Park_%26_Wildlife_lagoon.JPG" alt="image3" /></div>
-              <div><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/cd/a6/28/daraga-church-our-lady.jpg?w=1200&h=-1&s=1" alt="image4" /></div>
+              <div><img src={tourImages[1]} alt="image1" /></div>
+              <div><img src={tourImages[2]} alt="image2" /></div>
+              <div><img src={tourImages[3]} alt="image3" /></div>
+              <div><img src={tourImages[4]} alt="image4" /></div>
             </div>
           </div>
           <div className="Tour-Details__documentation">
@@ -65,14 +74,14 @@ const TourDetails = () => {
                     <img src={startingIcon} alt="starting-point" />
                     <div>
                       <p>Tour starts</p>
-                      <p>{tourLocation[0].name}</p>
+                      <p>{tourStartingLocation}</p>
                     </div>
                   </div>
                   <div className="Details-container__info">
                     <img src={endingIcon} alt="starting-point" />
                     <div>
                       <p>Tour ends</p>
-                      <p>Beach</p>
+                      <p>{tourEndingLocation}</p>
                     </div>
                   </div>
                   <div className="Details-container__info">
@@ -94,7 +103,7 @@ const TourDetails = () => {
               </div>
               <div className="Details-description">
                 <h3 className="Details-title">Description</h3>
-                <p>When visiting Bicol, one should never forget setting foot at Sorsogon. This province has so many natural wonders to offer to its tourists. The unspoiled beaches, picture-perfect landscape, and the famous whale shark interaction are just some of the things you can find in this magnificent place.</p>
+                <p>{tour.description}</p>
               </div>
             </div>
             <div className="Tour-Details__documentation-date"></div>
