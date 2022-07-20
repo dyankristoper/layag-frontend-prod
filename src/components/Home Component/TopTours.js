@@ -57,7 +57,7 @@ function TopTours() {
 
                         return(
 
-                            <Link to={`/destination/${destination.name}`}>
+                            <Link to={`/tour/${destination.name}`}>
 
                                 <div className='entry'>
                                     <img className="entry__image" src={destination.image} alt={destination.name} />

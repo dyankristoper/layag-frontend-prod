@@ -14,7 +14,7 @@ const Tour = () => {
     const getTours = async () => {
       try {
         const getData = await axios.get(
-          `http://localhost:8000/api/v1/tours/destination/${id}`
+          `http://localhost:8000/api/v1/tours/destination/${id.toLowerCase()}`
         );
 
         const imageCovers = getData.data.data.tours.map((el) => el.imageCover);
