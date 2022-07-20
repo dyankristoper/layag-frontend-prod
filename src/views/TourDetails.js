@@ -4,27 +4,38 @@ import endingIcon from '../components/Images/ending.png'
 import durationIcon from '../components/Images/duration.png'
 import difficultyIcon from '../components/Images/difficulty.png'
 import Header from '../components/Header';
-// import { useParams, useEffect, useState } from 'react'
-// import axios from 'axios'
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import axios from 'axios'
 
 
 const TourDetails = () => {
 
-  // const [tours, setTours] = useState([]);
-  // const { id } = useParams;
+  const [tour, setTour] = useState([]);
+  const [tourLocation, setTourLocation] = useState([]);
+  const { id } = useParams();
 
-  // useEffect(() => {
-  //   const fetchItems = async () => {
-  //     try {
-  //       const response = await axios.get(`http://localhost:8000/api/v1/tours/${id}`)
-  //       console.log(response.data.data)
-  //     } catch (error) {
-  //       console.log(error.message)
-  //     }
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8000/api/v1/tours/${id}`)
+        setTour(response.data.data.tour)
+        setTourLocation(tour.locations)
 
-  //   }
-  //   fetchItems();
-  // }, [])
+
+      } catch (error) {
+        console.log(error.message)
+      }
+
+    }
+    fetchItems();
+  }, [id])
+  console.log(tour)
+  console.log(tourLocation)
+
+
+
+
 
   return (
 
@@ -32,7 +43,7 @@ const TourDetails = () => {
 
       <Header />
       <div className="Details">
-        <h1>Name</h1>
+        <h1>{tour.name}</h1>
         <div className="Tour-Details">
           <div className="Tour-Details__images">
             <div className="Tour__image">
@@ -54,7 +65,7 @@ const TourDetails = () => {
                     <img src={startingIcon} alt="starting-point" />
                     <div>
                       <p>Tour starts</p>
-                      <p>Sorsogon</p>
+                      <p>{tourLocation[0].name}</p>
                     </div>
                   </div>
                   <div className="Details-container__info">
@@ -68,14 +79,14 @@ const TourDetails = () => {
                     <img src={durationIcon} alt="starting-point" />
                     <div>
                       <p>Duration</p>
-                      <p>4 days</p>
+                      <p>{tour.duration} days</p>
                     </div>
                   </div>
                   <div className="Details-container__info">
                     <img src={difficultyIcon} alt="starting-point" />
                     <div>
                       <p>Difficulty</p>
-                      <p>Easy</p>
+                      <p>{tour.difficulty}</p>
                     </div>
                   </div>
 
