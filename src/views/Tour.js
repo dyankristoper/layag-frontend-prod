@@ -131,15 +131,13 @@ const Tour = () => {
                           ( 150 reviews )
                         </span>
                       </div>
-                      <h4>Price: {t.price}</h4>
+                      <h4>Details</h4>
 
                       <p>
                         {t.summary}
                       </p>
 
-                      <h4>Distance:</h4>
-
-                      <p>10km</p>
+                      <h4 className="price">Price:{t.price}</h4>
                     </div>
                   </div>
                 );

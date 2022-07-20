@@ -105,6 +105,14 @@
                         overflow: hidden;
                         text-align: justify;
                     }
+
+                    & .price{
+                        background-color: rgb(241, 61, 61);
+                        color: white;
+                        width: 30%;
+                        padding: 16px;
+                        height: 50px;
+                    }
                 }
             }
             
