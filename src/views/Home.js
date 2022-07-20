@@ -8,7 +8,7 @@ function Home() {
     <div>
     <Banner />
     <TopTours />
-    <TourPackages />
+    <TourPackages /> 
     </div>
   )
 }
