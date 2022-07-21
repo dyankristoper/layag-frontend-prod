@@ -2,10 +2,10 @@
 
 .Details {
 
-
+  width: 60%;
+  margin: auto;
   font-family: $primary-font;
-
-
+  padding-bottom: 20px;
 
   h1 {
     margin: 30px 0;
@@ -13,9 +13,6 @@
   }
 
   .Tour-Details {
-    width: 60%;
-
-    margin: auto;
 
     &__images {
       @include flex(row, nowrap, left, left);
@@ -55,9 +52,9 @@
     }
 
     &__documentation {
-      @include flex(row, nowrap, center, center);
+      @include flex(row, nowrap, none, center);
       width: 100%;
-      height: 65vh;
+
       // background-color: gray;
 
       &-info {
@@ -70,10 +67,11 @@
           height: 50%;
           // background-color: green;
           width: 100%;
-          padding: 20px;
+          padding-top: 20px;
 
           .Details-title {
             color: #2B65EC;
+            font-size: 1.5rem;
           }
 
 
@@ -81,13 +79,12 @@
           .Details-container {
             @include flex(row, wrap, center, center);
             width: 100%;
-            // background-color: orange;
-            height: 80%;
+
 
 
 
             &__info {
-              @include flex(row, nowrap, center, center);
+              @include flex(row, nowrap, none, center);
               width: 50%;
               height: 50%;
 
@@ -98,7 +95,8 @@
               }
 
               div {
-                margin: 0 20px;
+                margin: 40px;
+                padding: 10px;
 
                 p {
                   margin: 5px 0;
@@ -113,11 +111,12 @@
           // background-color: gray;
           width: 100%;
           height: 50%;
-          padding: 20px;
+          padding-top: 20px;
 
           .Details-title {
             margin-bottom: 20px;
             color: #2B65EC;
+            font-size: 1.5rem;
           }
 
           p {
@@ -127,15 +126,62 @@
         }
 
 
-
-
       }
 
-      &-date {
-        width: 50%;
-        // background-color: blue;
-        height: 100%;
+
+    }
+  }
+
+  .Reviews {
+
+
+    margin-top: 50px;
+
+    h3 {
+      color: #2B65EC;
+      font-size: 1.5rem;
+    }
+
+    .Tour-Review {
+      padding: 20px;
+      margin-top: 50px;
+      @include flex(row, nowrap, center, center);
+      border: 1px solid rgb(223, 222, 222);
+      border-top: .1px;
+      box-shadow: 2px 3px rgba(221, 221, 221, 0.849);
+
+
+      &__image {
+
+        img {
+          width: 80px;
+          height: 80px;
+          border-radius: 100%;
+        }
+      }
+
+      &__details {
+
+        margin-left: 30px;
+
+        &__name {
+          font-weight: bolder;
+        }
+
+        &__rating {}
+
+        &__date {
+          font-size: 10px;
+          color: rgb(142, 143, 143);
+        }
+
+        &__comment {
+          line-height: 25px;
+          margin-top: 20px;
+        }
+
       }
     }
   }
+
 }
