@@ -1,14 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useParams } from "react-router";
 import "./Tours.scss";
 import Header from "../components/Header";
 import SearchBar from "../components/Home Component/SearchBar";
-import bg from "date-fns/esm/locale/bg/index.js";
+import {Link} from "react-router-dom";
 
 const Tour = () => {
   const [tours, setTours] = useState([]);
   const [results, setResult] = useState([]);
+  const [background, setBackground] = useState();
   const { id } = useParams();
 
   useEffect(() => {
@@ -19,24 +20,31 @@ const Tour = () => {
         );
 
         const imageCovers = getData.data.data.tours.map((el) => el.imageCover);
-        console.log(getData.data.data.tours);
+       
         setTours(getData.data.data.tours);
         setResult(getData.data);
+        setBackground(imageCovers);
+
+        console.log(imageCovers);
+      
+
       } catch (err) {
         console.log(err);
       }
+
+     
     };
 
     getTours();
   }, [id]);
 
-  console.log(tours);
+
 
   return (
     <>
       <Header />
       <div className="Tour">
-        <div className="Tour__hero"></div>
+        {/* <div className="Tour__hero" ></div> */}
         <div className="Tour__Title">
           <h3>
             {results.results} Tours Found In <span>{id[0].toUpperCase() + id.substring(1)}</span>
@@ -99,6 +107,8 @@ const Tour = () => {
             {tours &&
               tours.map((t) => {
                 return (
+
+                  <Link to ={`/tourdetails/${t.id}`} >
                   <div className="details-section__choices" key={t.id}>
                     <div className="image">
                       <img
@@ -140,6 +150,7 @@ const Tour = () => {
                       <h4 className="price">Price:{t.price}</h4>
                     </div>
                   </div>
+                  </Link>
                 );
               })}
           </div>

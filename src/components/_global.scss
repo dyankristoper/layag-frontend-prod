@@ -9,3 +9,8 @@ $primary-font: 'Albert Sans', sans-serif;
     justify-content: $justify;
     align-items: $align;
 }
+
+a{
+    text-decoration: none;
+    color:inherit;
+}   

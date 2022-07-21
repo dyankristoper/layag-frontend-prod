@@ -68,6 +68,14 @@
                 letter-spacing: 1px;
                 margin-bottom: 15px;
 
+                &:hover{
+                    background-color: rgba(240, 255, 255, 0.603);
+                    border: 2px solid;
+                    border-color:#2B65EC;
+                }
+
+                
+
                 & .image{
                     padding:15px 0;
 
@@ -85,7 +93,8 @@
                         color: #2B65EC;
                         margin-bottom: 10px;
                     }
-                    
+
+              
                     & .stars{
                         display: inline-block;
                         
