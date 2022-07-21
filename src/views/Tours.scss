@@ -28,7 +28,7 @@
 
     &__information{
         margin: 50px 0;
-        @include flex(row, wrap, center, flex-start );
+        @include flex(row, wrap, flex-end, flex-start );
         gap: 10px;
 
         & .filter-section{
@@ -38,6 +38,8 @@
             width: 250px;
             padding: 20px 30px;
             letter-spacing: 2px;
+            position: sticky;
+            top:10px;
 
             & div{
                 margin-top: 5px;
