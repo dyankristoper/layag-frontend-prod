@@ -4,7 +4,7 @@ import Login from './views/Login';
 import SignUp from './views/SignUp';
 import { Routes, Route } from 'react-router-dom';
 import Tour from './views/Tour';
-// import TourDetails from "./views/TourDetails"
+import TourDetails from "./views/TourDetails"
 import PrivateRoutes from './authentication/PrivateRoutes';
 import AdminRoutes from './authentication/AdminRoutes';
 
@@ -15,8 +15,8 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/destination/:id" element={<Tour />} />
-        {/* <Route path="/tourdetails/:id" element={<TourDetails />} /> */}
+        <Route path="/tour/:id" element={<Tour />} />
+        <Route path="/tourdetails/:id" element={<TourDetails />} />
         <Route element={<PrivateRoutes />}>
           {/* <Route path='/user/dashboard' element={Dashboard} />  */}
           {/* <Route path='/profile/:userId' element={Profile} /> */}
