@@ -6,7 +6,7 @@ const AdminRoutes = () => {
   return isAuthenticated() && isAuthenticated().user.role === 'admin' ? (
     <Outlet />
   ) : (
-    <Navigate to="/signin" />
+    <Navigate to="/signup" />
   );
 };
 
