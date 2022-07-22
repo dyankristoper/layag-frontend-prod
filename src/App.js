@@ -9,6 +9,7 @@ import PrivateRoutes from './authentication/PrivateRoutes';
 import AdminRoutes from './authentication/AdminRoutes';
 import TourHistory from './views/TourHistory';
 import AddEditTours from './views/AddEditTours';
+import Profile from './views/Profile';
 
 const App = () => {
   return (
@@ -31,6 +32,7 @@ const App = () => {
           <Route path="/addTour" element={<AddEditTours />} />
           <Route path="/tourHistory" element={<TourHistory />} />
         </Route>
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </div>
   );

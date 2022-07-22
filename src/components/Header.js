@@ -2,6 +2,7 @@ import './Header.scss';
 import layag from './Images/layag-icon.png';
 import profile from './Images/user-menu64.png';
 import {useState} from 'react';
+import {Link} from "react-router-dom";
 
 const Header = () => {
 
@@ -31,7 +32,7 @@ const Header = () => {
       modal && 
       <div className='Header__modal'>
         <ul>
-          <li>Profile</li>
+          <Link to="/profile"><li>Profile</li></Link>
           <li>Tour</li>
           <li>Help</li>
         </ul>
