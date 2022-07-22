@@ -1,21 +1,24 @@
 import './TourHistory.scss';
+import { Link } from 'react-router-dom'
 
 const TourHistory = () => {
   return (
     <div className="Tour-History">
       <h3>My tours</h3>
-      <button type="button">Add Tour+</button>
+      <Link to="/addTour">
+        <button type="button">Add Tour+</button>
+      </Link>
       <div className="Tour-History-Content">
         <table>
-          <tr>
+          <tr className="TourHistory-Head">
+
             <th> Tour Name </th>
             <th> Details </th>
             <th> Prices </th>
             <th> Date of Tours </th>
             <th> Actions </th>
+
           </tr>
-
-
           <tr>
             <td>6D5N South Cebu Tours</td>
             <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tincidunt praesent semper feugiat nibh sed pulvinar proin gravida. Orci nulla pellentesque dignissim enim sit amet venenatis urna.</td>
