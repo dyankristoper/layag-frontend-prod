@@ -4,12 +4,13 @@ import endingIcon from '../components/Images/ending.png'
 import durationIcon from '../components/Images/duration.png'
 import difficultyIcon from '../components/Images/difficulty.png'
 import Header from '../components/Header';
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { Calendar } from "react-date-range";
 import { addDays } from 'date-fns'
 import format from 'date-fns/format';
+import bg from 'date-fns/esm/locale/bg/index.js'
 
 const TourDetails = () => {
 
@@ -17,8 +18,12 @@ const TourDetails = () => {
   const [tourStartingLocation, setTourStartingLocation] = useState();
   const [tourEndingLocation, setTourEndingLocation] = useState();
   const [tourImages, setTourImages] = useState([]);
+  const bgMain = useRef(null);
+  const bg1 = useRef(null);
+  const bg2 = useRef(null);
+  const bg3 = useRef(null);
+  const bg4 = useRef(null);
   const { id } = useParams();
-
   const [startDate, setstartDate] = useState(new Date());
   const [endDate, setendDate] = useState(addDays(new Date(), 4));
 
@@ -34,6 +39,7 @@ const TourDetails = () => {
         setTourStartingLocation(start)
         setTourEndingLocation(end[end.length - 1].name)
         setTourImages(images);
+        console.log(images)
 
 
       } catch (error) {
@@ -44,15 +50,31 @@ const TourDetails = () => {
     fetchItems();
   }, [id])
 
- useEffect(() => {
-    setendDate(addDays(startDate, +tour.duration - 1))   
- },[startDate])
+  useEffect(() => {
+    setendDate(addDays(startDate, +tour.duration - 1))
+  }, [startDate])
 
-useEffect(() => {
-  console.log(startDate, endDate);
-},[])
+  useEffect(() => {
+    bgMain.current.style.backgroundImage = `url(${tourImages[0]})`;
+    bgMain.current.style.backgroundSize = "cover";
+    bgMain.current.style.backgroundPosition = "center";
+    bg1.current.style.backgroundImage = `url(${tourImages[1]})`;
+    bg1.current.style.backgroundSize = "cover";
+    bg1.current.style.backgroundPosition = "center";
+    bg2.current.style.backgroundImage = `url(${tourImages[2]})`;
+    bg2.current.style.backgroundSize = "cover";
+    bg2.current.style.backgroundPosition = "center";
+    bg3.current.style.backgroundImage = `url(${tourImages[3]})`;
+    bg3.current.style.backgroundSize = "cover";
+    bg3.current.style.backgroundPosition = "center";
+    bg4.current.style.backgroundImage = `url(${tourImages[4]})`;
+    bg4.current.style.backgroundSize = "cover";
+    bg4.current.style.backgroundPosition = "center";
 
-  console.log(endDate)
+  }, [tourImages])
+
+
+
 
 
   return (
@@ -64,14 +86,12 @@ useEffect(() => {
         <h1>{tour.name}</h1>
         <div className="Tour-Details">
           <div className="Tour-Details__images">
-            <div className="Tour__image">
-              <img src={tourImages[0]} alt="Tour" />
-            </div>
+            <div className="Tour__image" ref={bgMain}></div>
             <div className="Tour__images">
-              <div><img src={tourImages[1]} alt="Tour image1" /></div>
-              <div><img src={tourImages[2]} alt="Tour image2" /></div>
-              <div><img src={tourImages[3]} alt="Tour image3" /></div>
-              <div><img src={tourImages[4]} alt="Tour image4" /></div>
+              <div className="bg" ref={bg1}></div>
+              <div className="bg" ref={bg2}></div>
+              <div className="bg" ref={bg3}></div>
+              <div className="bg" ref={bg4}></div>
             </div>
           </div>
           <div className="Tour-Details__documentation">
@@ -116,7 +136,7 @@ useEffect(() => {
               </div>
             </div>
             <div className="Tour-Details__documentation-date">
-              
+
               <div className="calendar" >
                 <h3>Select Dates</h3>
                 <Calendar
