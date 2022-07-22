@@ -7,7 +7,7 @@ import Header from '../components/Header';
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
-import { DateRange } from "react-date-range";
+import { Calendar } from "react-date-range";
 import { addDays } from 'date-fns'
 import format from 'date-fns/format';
 
@@ -19,13 +19,9 @@ const TourDetails = () => {
   const [tourImages, setTourImages] = useState([]);
   const { id } = useParams();
 
-  const [range, setRange] = useState([
-    {
-      startDate: new Date(),
-      endDate: addDays(new Date(), 1),
-      key: 'selection'
-    }
-  ])
+  const [startDate, setstartDate] = useState(new Date());
+  const [endDate, setendDate] = useState(addDays(new Date(), 4));
+
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -47,13 +43,16 @@ const TourDetails = () => {
     }
     fetchItems();
   }, [id])
-  console.log(tour)
-  console.log(tourStartingLocation)
-  console.log(tourEndingLocation)
-  console.log(tourImages);
 
+ useEffect(() => {
+    setendDate(addDays(startDate, +tour.duration - 1))   
+ },[startDate])
 
+useEffect(() => {
+  console.log(startDate, endDate);
+},[])
 
+  console.log(endDate)
 
 
   return (
@@ -117,17 +116,23 @@ const TourDetails = () => {
               </div>
             </div>
             <div className="Tour-Details__documentation-date">
-              <div className="calendarWrap" >
-                <DateRange
-                  onChange={item => setRange([item.selection])}
+              
+              <div className="calendar" >
+                <h3>Select Dates</h3>
+                <Calendar
+                  onChange={(date) => {
+                    setstartDate(date);
+                    setendDate(date + tour.duration)
+                  }}
+                  minDate={startDate}
                   editableDateInputs={true}
                   moveRangeOnFirstSelection={false}
-                  ranges={range}
                   months={1}
-                  direction="horizontal"
                   className="calendarElement"
                 />
               </div>
+
+              <button className='button'>Book Now</button>
             </div>
           </div>
         </div>
