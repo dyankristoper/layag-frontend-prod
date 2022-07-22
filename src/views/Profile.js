@@ -1,9 +1,12 @@
 import './Profile.scss';
 import { AiOutlineStar } from "react-icons/ai";
 import { BsCheck } from "react-icons/bs";
+import Header from '../components/Header';
 
 const  Profile = () => {
   return (
+    <>
+    <Header />
     <div className="profile">
         <div className="profile__section">
         
@@ -82,12 +85,11 @@ const  Profile = () => {
                         <p className="Tour-Review__details__comment">Great activity. Gives you the chance to explore and learn about the lesser-popular but just as beautiful attractions of Coron. I recommend doing this activity along with Coron's famous water attractions to get a full appreciation of the island. Our guide was extremely helpful and very informative. He clearly knew what he was talking about. Definitely recommend.</p>
                      </div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
+    
+    </>
   )
 }
 

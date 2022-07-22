@@ -3,6 +3,7 @@
 .profile{
     @include flex(row, wrap,center,none);
     font-family: $primary-font;
+    margin-top: 20px;
     gap: 50px;
 
     &__section{
