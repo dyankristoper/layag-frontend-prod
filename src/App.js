@@ -7,6 +7,8 @@ import Tour from './views/Tour';
 import TourDetails from "./views/TourDetails"
 import PrivateRoutes from './authentication/PrivateRoutes';
 import AdminRoutes from './authentication/AdminRoutes';
+import TourHistory from './views/TourHistory';
+import AddEditTours from './views/AddEditTours';
 
 const App = () => {
   return (
@@ -26,8 +28,9 @@ const App = () => {
           {/* <Route path='/admin/dashboard' element={AdminDashboard} /> */}
           {/* <Route path='/admin/dashboard' element={AdminDashboard} /> */}
           {/* <Route path='/admin/dashboard' element={AdminDashboard} /> */}
-          {/* <Route path='/admin/dashboard' element={AdminDashboard} /> */}
         </Route>
+        <Route path='/tourHistory' element={<TourHistory />} />
+        <Route path='/addTour' element={<AddEditTours />} />
       </Routes>
     </div>
   );
