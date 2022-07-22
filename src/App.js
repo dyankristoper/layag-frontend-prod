@@ -4,7 +4,7 @@ import Login from './views/Login';
 import SignUp from './views/SignUp';
 import { Routes, Route } from 'react-router-dom';
 import Tour from './views/Tour';
-import TourDetails from "./views/TourDetails"
+import TourDetails from './views/TourDetails';
 import PrivateRoutes from './authentication/PrivateRoutes';
 import AdminRoutes from './authentication/AdminRoutes';
 import TourHistory from './views/TourHistory';
@@ -28,9 +28,9 @@ const App = () => {
           {/* <Route path='/admin/dashboard' element={AdminDashboard} /> */}
           {/* <Route path='/admin/dashboard' element={AdminDashboard} /> */}
           {/* <Route path='/admin/dashboard' element={AdminDashboard} /> */}
+          <Route path="/addTour" element={<AddEditTours />} />
+          <Route path="/tourHistory" element={<TourHistory />} />
         </Route>
-        <Route path='/tourHistory' element={<TourHistory />} />
-        <Route path='/addTour' element={<AddEditTours />} />
       </Routes>
     </div>
   );
