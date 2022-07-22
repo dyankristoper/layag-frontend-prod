@@ -54,6 +54,13 @@
       margin: 8px 0;
     }
 
+    &__input:focus {
+
+      outline: none !important;
+      border: 2px solid #2b65ec8f;
+
+    }
+
     &__input::placeholder {
       color: rgb(116, 116, 116);
     }
