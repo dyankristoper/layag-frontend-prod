@@ -29,7 +29,7 @@ const AddEditTours = () => {
         //   });
         // } else {
         const response = await axios.post('http://localhost:8000/api/v1/tours', {
-          tours: [{ name: tourName, duration: tourDuration, maxGroupSize: tourMaxGroupSize, difficulty: tourDifficulty, price: tourPrice, summary: tourSummary, description: tourDescription, imageCover: tourImage }],
+          name: tourName, duration: tourDuration, maxGroupSize: tourMaxGroupSize, difficulty: tourDifficulty, price: tourPrice, summary: tourSummary, description: tourDescription, imageCover: tourImage, locations: [], startLocation: ''
         });
 
 
