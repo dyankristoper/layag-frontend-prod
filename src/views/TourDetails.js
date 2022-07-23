@@ -124,14 +124,14 @@ const TourDetails = () => {
                     <img src={startingIcon} alt="starting-point" />
                     <div>
                       <p>Tour starts</p>
-                      <p>{locations[0].name}</p>
+                      {locations.length && <p>{locations[0].name}</p>}
                     </div>
                   </div>
                   <div className="Details-container__info">
                     <img src={endingIcon} alt="starting-point" />
                     <div>
                       <p>Tour ends</p>
-                      <p>{locations[locations.length - 1].name}</p>
+                      {locations.length && <p>{locations[locations.length - 1].name}</p>}
                     </div>
                   </div>
                   <div className="Details-container__info">
