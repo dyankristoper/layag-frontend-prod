@@ -4,42 +4,54 @@ import endingIcon from '../components/Images/ending.png'
 import durationIcon from '../components/Images/duration.png'
 import difficultyIcon from '../components/Images/difficulty.png'
 import Header from '../components/Header';
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { Calendar } from "react-date-range";
 import { addDays } from 'date-fns'
-import format from 'date-fns/format';
-import bg from 'date-fns/esm/locale/bg/index.js'
+
+
 
 const TourDetails = () => {
-
-  const [tour, setTour] = useState([]);
-  const [tourStartingLocation, setTourStartingLocation] = useState();
-  const [tourEndingLocation, setTourEndingLocation] = useState();
-  const [tourImages, setTourImages] = useState([]);
-  const bgMain = useRef(null);
-  const bg1 = useRef(null);
-  const bg2 = useRef(null);
-  const bg3 = useRef(null);
-  const bg4 = useRef(null);
+  const [tour, setTour] = useState(null);
+  // const [tour, setTour] = useState([]);
+  // const [tourStartingLocation, setTourStartingLocation] = useState();
+  // const [tourEndingLocation, setTourEndingLocation] = useState();
+  // const [tourImages, setTourImages] = useState([]);
+  // const bgMain = useRef(null);
+  // const bg1 = useRef(null);
+  // const bg2 = useRef(null);
+  // const bg3 = useRef(null);
+  // const bg4 = useRef(null);
+  // 1 element = 1 reference (useRef)
   const { id } = useParams();
+  // const [startDate, setstartDate] = useState(new Date());
+  // const [endDate, setendDate] = useState(addDays(new Date(), 4));
+
+  // // derived state
+  // const start = tour.length > 0 && tour.locations[0].name;
+  // const end = tour.length > 0 && tour.locations;
+  // const images = tour.length > 0 && tour.images;
   const [startDate, setstartDate] = useState(new Date());
-  const [endDate, setendDate] = useState(addDays(new Date(), 4));
 
 
+  const { locations, duration, images, difficulty, description } = tour || {};
+
+  const endDate = addDays(startDate, +duration - 1);
+  console.log(endDate)
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/api/v1/tours/${id}`)
-        setTour(response.data.data.tour)
-        const start = response.data.data.tour.locations[0].name;
-        const end = response.data.data.tour.locations;
-        const images = response.data.data.tour.images;
-        setTourStartingLocation(start)
-        setTourEndingLocation(end[end.length - 1].name)
-        setTourImages(images);
-        console.log(images)
+        const { data } = await axios.get(`http://localhost:8000/api/v1/tours/${id}`)
+        setTour(data.data.tour);
+        // setTour(response.data.data.tour)
+        // const start = response.data.data.tour.locations[0].name;
+        // const end = response.data.data.tour.locations;
+        // const images = response.data.data.tour.images;
+        // setTourStartingLocation(start)
+        // setTourEndingLocation(end[end.length - 1].name)
+        // setTourImages(images);
+        // console.log(images)
 
 
       } catch (error) {
@@ -50,30 +62,34 @@ const TourDetails = () => {
     fetchItems();
   }, [id])
 
-  useEffect(() => {
-    setendDate(addDays(startDate, +tour.duration - 1))
-  }, [startDate])
+  // useEffect(() => {
+  //   setendDate(addDays(startDate, +tour.duration - 1))
+  // }, [startDate])
 
-  useEffect(() => {
-    bgMain.current.style.backgroundImage = `url(${tourImages[0]})`;
-    bgMain.current.style.backgroundSize = "cover";
-    bgMain.current.style.backgroundPosition = "center";
-    bg1.current.style.backgroundImage = `url(${tourImages[1]})`;
-    bg1.current.style.backgroundSize = "cover";
-    bg1.current.style.backgroundPosition = "center";
-    bg2.current.style.backgroundImage = `url(${tourImages[2]})`;
-    bg2.current.style.backgroundSize = "cover";
-    bg2.current.style.backgroundPosition = "center";
-    bg3.current.style.backgroundImage = `url(${tourImages[3]})`;
-    bg3.current.style.backgroundSize = "cover";
-    bg3.current.style.backgroundPosition = "center";
-    bg4.current.style.backgroundImage = `url(${tourImages[4]})`;
-    bg4.current.style.backgroundSize = "cover";
-    bg4.current.style.backgroundPosition = "center";
+  // useEffect(() => {
+  // bgMain.current.style.backgroundImage = `url(${tourImages[0]})`;
+  // bgMain.current.style.backgroundSize = "cover";
+  // bgMain.current.style.backgroundPosition = "center";
+  // bg1.current.style.backgroundImage = `url(${tourImages[1]})`;
+  // bg1.current.style.backgroundSize = "cover";
+  // bg1.current.style.backgroundPosition = "center";
+  // bg2.current.style.backgroundImage = `url(${tourImages[2]})`;
+  // bg2.current.style.backgroundSize = "cover";
+  // bg2.current.style.backgroundPosition = "center";
+  // bg3.current.style.backgroundImage = `url(${tourImages[3]})`;
+  // bg3.current.style.backgroundSize = "cover";
+  // bg3.current.style.backgroundPosition = "center";
+  // bg4.current.style.backgroundImage = `url(${tourImages[4]})`;
+  // bg4.current.style.backgroundSize = "cover";
+  // bg4.current.style.backgroundPosition = "center";
 
-  }, [tourImages])
+  // }, [tourImages])
 
 
+  console.log(tour)
+  if (!tour) {
+    return null;
+  }
 
 
 
@@ -86,13 +102,18 @@ const TourDetails = () => {
         <h1>{tour.name}</h1>
         <div className="Tour-Details">
           <div className="Tour-Details__images">
-            <div className="Tour__image" ref={bgMain}></div>
+            {images.map((src) => (
+              <div key={src} className="Tour-Details__image">
+                <img src={src} alt="" />
+              </div>
+            ))}
+            {/* <div className="Tour__image" ref={bgMain}></div>
             <div className="Tour__images">
               <div className="bg" ref={bg1}></div>
               <div className="bg" ref={bg2}></div>
               <div className="bg" ref={bg3}></div>
               <div className="bg" ref={bg4}></div>
-            </div>
+            </div> */}
           </div>
           <div className="Tour-Details__documentation">
             <div className="Tour-Details__documentation-info">
@@ -103,28 +124,28 @@ const TourDetails = () => {
                     <img src={startingIcon} alt="starting-point" />
                     <div>
                       <p>Tour starts</p>
-                      <p>{tourStartingLocation}</p>
+                      <p>{locations[0].name}</p>
                     </div>
                   </div>
                   <div className="Details-container__info">
                     <img src={endingIcon} alt="starting-point" />
                     <div>
                       <p>Tour ends</p>
-                      <p>{tourEndingLocation}</p>
+                      <p>{locations[locations.length - 1].name}</p>
                     </div>
                   </div>
                   <div className="Details-container__info">
                     <img src={durationIcon} alt="starting-point" />
                     <div>
                       <p>Duration</p>
-                      <p>{tour.duration} days</p>
+                      <p>{duration} days</p>
                     </div>
                   </div>
                   <div className="Details-container__info">
                     <img src={difficultyIcon} alt="starting-point" />
                     <div>
                       <p>Difficulty</p>
-                      <p>{tour.difficulty}</p>
+                      <p>{difficulty}</p>
                     </div>
                   </div>
 
@@ -132,7 +153,7 @@ const TourDetails = () => {
               </div>
               <div className="Details-description">
                 <h3 className="Details-title">Description</h3>
-                <p>{tour.description}</p>
+                <p>{description}</p>
               </div>
             </div>
             <div className="Tour-Details__documentation-date">
@@ -142,7 +163,6 @@ const TourDetails = () => {
                 <Calendar
                   onChange={(date) => {
                     setstartDate(date);
-                    setendDate(date + tour.duration)
                   }}
                   minDate={startDate}
                   editableDateInputs={true}
