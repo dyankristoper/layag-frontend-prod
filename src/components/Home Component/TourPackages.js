@@ -64,8 +64,9 @@ const TourPackages = () => {
                     <br />
                     <h5>Details</h5>
                     <p className="TourPackages-list__description">
-                      {tour.summary}
+                      {`${tour.summary.substring(0, 200)}...`} <span>see more</span>
                     </p>
+
                   </div>
                 </div>
               </Link>
