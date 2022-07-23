@@ -2,19 +2,19 @@ import './Header.scss';
 import layag from './Images/layag-icon.png';
 import profile from './Images/user-menu64.png';
 import { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom';
+import { signout, isAuthenticated } from '../authentication/Authentication';
 
 const Header = () => {
-
   const [modal, setModal] = useState(false);
+  const navigate = useNavigate();
 
   const onclick = () => {
-    setModal(modal => !modal)
-  }
+    setModal((modal) => !modal);
+  };
 
   return (
     <>
-
       <header className="Header">
         <Link to="/">
           <div className="Header__logoTitle">
@@ -27,21 +27,65 @@ const Header = () => {
           <img src={profile} alt="user-login" onClick={onclick} />
         </div>
 
-
-
         {/* // MODAL */}
-        {
-          modal &&
-          <div className='Header__modal'>
+        {/* {modal && (
+          <div className="Header__modal">
             <ul>
-              <Link to="/profile"><li>Profile</li></Link>
+              <li>Profile</li>
               <li>Tour</li>
               <li>Help</li>
             </ul>
-
           </div>
-        }
-
+        )} */}
+        {modal && !isAuthenticated() && (
+          <div className="Header__modal">
+            <ul>
+              <Link to="/signup">
+                <li>Sign up</li>
+              </Link>
+              <Link to="/login">
+                <li>Log in</li>
+              </Link>
+              <li>Help</li>
+            </ul>
+          </div>
+        )}
+        {modal && isAuthenticated() && isAuthenticated().user.role === 'user' && (
+          <div className="Header__modal">
+            <ul>
+              <Link to="/profile">
+                <li>My Profile</li>
+              </Link>
+              <li>Tour</li>
+              <li
+                onClick={() =>
+                  signout(() => {
+                    navigate('/login', { replace: true });
+                  })
+                }
+              >
+                Sign out
+              </li>
+            </ul>
+          </div>
+        )}
+        {modal && isAuthenticated() && isAuthenticated().user.role === 'admin' && (
+          <div className="Header__modal">
+            <ul>
+              <li>My Profile</li>
+              <li>Modify Tours</li>
+              <li
+                onClick={() =>
+                  signout(() => {
+                    navigate('/login', { replace: true });
+                  })
+                }
+              >
+                Sign out
+              </li>
+            </ul>
+          </div>
+        )}
       </header>
     </>
   );

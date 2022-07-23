@@ -61,7 +61,7 @@ const Login = () => {
   const redirectUser = () => {
     if (redirectTo) {
       if (user && user.role === 'admin') {
-        return <Navigate to="/admin/dashboard" replace={true} />;
+        return <Navigate to="/" replace={true} />;
       } else {
         return <Navigate to="/" replace={true} />;
       }

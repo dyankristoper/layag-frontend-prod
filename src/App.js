@@ -29,9 +29,9 @@ const App = () => {
           {/* <Route path='/admin/dashboard' element={AdminDashboard} /> */}
           {/* <Route path='/admin/dashboard' element={AdminDashboard} /> */}
           {/* <Route path='/admin/dashboard' element={AdminDashboard} /> */}
-          <Route path="/addTour" element={<AddEditTours />} />
-          <Route path="/tourHistory" element={<TourHistory />} />
         </Route>
+        <Route path="/addTour" element={<AddEditTours />} />
+        <Route path="/tourHistory" element={<TourHistory />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
     </div>
