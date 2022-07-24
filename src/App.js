@@ -10,6 +10,7 @@ import AdminRoutes from './authentication/AdminRoutes';
 import TourHistory from './views/TourHistory';
 import AddEditTours from './views/AddEditTours';
 import Profile from './views/Profile';
+import UpdateProfile from './views/UpdateProfile';
 
 const App = () => {
   return (
@@ -20,11 +21,8 @@ const App = () => {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/tour/:id" element={<Tour />} />
         <Route path="/tourdetails/:id" element={<TourDetails />} />
-        <Route element={<PrivateRoutes />}>
-          {/* <Route path='/user/dashboard' element={Dashboard} />  */}
-          {/* <Route path='/profile/:userId' element={Profile} /> */}
-          <Route />
-        </Route>
+        <Route path="/updateprofile" element={<UpdateProfile />} />
+        <Route element={<PrivateRoutes />}></Route>
         <Route element={<AdminRoutes />}>
           {/* <Route path='/admin/dashboard' element={AdminDashboard} /> */}
           {/* <Route path='/admin/dashboard' element={AdminDashboard} /> */}
