@@ -1,18 +1,16 @@
-toptours js
-
-import './TopTours.scss';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+
 
 function TopTours() {
   const places = [
     {
-      name: 'Manila',
+      name: 'Aklan',
       image:
         'https://www.leeabbamonte.com/wp-content/uploads/2015/02/IMG_1291-1024x1024.jpg',
     },
     {
-      name: 'Rizal',
+      name: 'Boracay',
       image:
         'http://www.traveltothephilippines.info/wp-content/uploads/2019/09/Bohol-Chocolate-Hills2.jpg',
     },
