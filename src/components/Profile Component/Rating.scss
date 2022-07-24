@@ -1,0 +1,43 @@
+@import '../global';
+.Rating{
+    text-align: center;
+    font-family: $primary-font;
+    width: 500px;
+    margin: auto;
+
+    & h3{
+
+    }
+
+    &__details{
+
+        @include flex(column, nowrap,center,center);
+
+          
+        & .rating-information{
+            @include flex(row, nowrap, space-evenly, center);
+
+            & input[type="radio"]{
+                display: none;
+            }
+
+        }
+            
+               
+           
+   
+           & textarea{
+               resize: none;
+               width: 300px;
+               height: 100px;
+           }
+           
+           & div{
+            
+            & label{
+             
+            }
+           }
+        
+    }
+}

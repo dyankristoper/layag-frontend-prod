@@ -4,6 +4,7 @@ import { BsCheck } from 'react-icons/bs';
 import Header from '../components/Header';
 import { isAuthenticated } from '../authentication/Authentication';
 import { Link } from 'react-router-dom';
+import Rating from '../components/Profile Component/Rating';
 
 const Profile = () => {
   const {
@@ -117,6 +118,47 @@ const Profile = () => {
           </div>
         </div>
       </div>
+
+      <div className="Tour-History">
+      <h3>Tours</h3>
+      <Link to="/addTour">
+        <button type="button">Add Tour+</button>
+      </Link>
+      <div className="Tour-History-Content">
+        <table>
+          <thead>
+            <tr>
+
+              <th> Image</th>
+              <th> Tour Name </th>
+              <th> Address</th>
+              <th> Price</th>
+              <th> Rating </th>
+              <th> Actions </th>
+
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <td><img src=""/></td>
+                  <td>asjdashdwadads asdas</td>
+                  <td>asjdashdwadads asdas</td>
+                  <td>4400</td>
+                  <td>123121241</td>
+                  <td>
+                    <div className="Tour-History__actions">
+                      {/* <td><img className="Tour-History__actions__edit" src="https://cdn-icons-png.flaticon.com/512/1159/1159633.png" alt="data1" /></td> */}
+                      {/* <td><img className="Tour-History__actions__delete" src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png" alt="data2" /></td> */}
+                      <button>Write a reivew</button>
+                    </div>
+                  </td>
+              </tr>
+                
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <Rating />
     </>
   );
 };
