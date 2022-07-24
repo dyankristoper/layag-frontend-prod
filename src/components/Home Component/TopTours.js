@@ -1,3 +1,5 @@
+toptours js
+
 import './TopTours.scss';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
@@ -5,43 +7,40 @@ import { Link } from 'react-router-dom';
 function TopTours() {
   const places = [
     {
-      name: 'Puero Prinsesa',
+      name: 'Manila',
       image:
         'https://www.leeabbamonte.com/wp-content/uploads/2015/02/IMG_1291-1024x1024.jpg',
     },
     {
-      name: 'Bohol',
+      name: 'Rizal',
       image:
         'http://www.traveltothephilippines.info/wp-content/uploads/2019/09/Bohol-Chocolate-Hills2.jpg',
     },
     {
-      name: 'Ilocos',
+      name: 'Bicol',
       image:
         'https://i.pinimg.com/736x/af/d3/dc/afd3dc3bbe8ee1cbda55cbbccb296780.jpg',
     },
     {
-      name: 'Bicol',
+      name: 'Bohol',
       image:
         'https://www.rappler.com/tachyon/2021/07/mayon-volcano-shutterstock-sq.jpg',
     },
     {
-      name: 'Coron',
+      name: 'Cebu',
       image:
         'https://fastly.4sqi.net/img/general/600x600/q57qLZktCiTMYo16RPkEHntgV8cZeO0d4k9IwuTD_yM.jpg',
     },
     {
-      name: 'El Nido',
+      name: 'Laguna',
       image:
         'https://i.pinimg.com/originals/bb/2d/45/bb2d456a64281dd35f738728e605fd7c.jpg',
     },
     {
-      name: 'Boracay',
+      name: 'Palawan',
       image: 'https://pbs.twimg.com/media/E-Anmd7VQAA4fAB.jpg',
     },
-    {
-      name: 'Cebu',
-      image: 'https://www.yourtravy.com/wp-content/uploads/2019/08/12.png',
-    },
+
   ];
 
   const [destination, setDestination] = useState();
