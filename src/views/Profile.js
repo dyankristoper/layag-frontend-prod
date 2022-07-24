@@ -3,10 +3,11 @@ import { AiOutlineStar } from 'react-icons/ai';
 import { BsCheck } from 'react-icons/bs';
 import Header from '../components/Header';
 import { isAuthenticated } from '../authentication/Authentication';
+import { Link } from 'react-router-dom';
 
 const Profile = () => {
   const {
-    user: { _id, name, email, role },
+    user: { name, email },
   } = isAuthenticated();
 
   return (
@@ -60,11 +61,12 @@ const Profile = () => {
           <div className="credentials">
             <p>Name: {name}</p>
             <p>Email: {email}</p>
-            <p>Password: **********</p>
-
-            <button>Edit Profile</button>
-            <button>Change Password</button>
+            <p>Password: *******</p>
+            <Link to="/updateprofile">
+              <button style={{ cursor: 'pointer' }}>Update Profile</button>
+            </Link>
           </div>
+
           <div className="your-reviews">
             <h3>Reviews</h3>
             <div className="Tour-Review">
