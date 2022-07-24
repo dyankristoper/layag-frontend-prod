@@ -1,19 +1,23 @@
+
 import './TourDetails.scss'
 import startingIcon from '../components/Images/starting.png'
 import endingIcon from '../components/Images/ending.png'
 import durationIcon from '../components/Images/duration.png'
 import difficultyIcon from '../components/Images/difficulty.png'
 import Header from '../components/Header';
+import Map from '../components/TourDetail components/Map'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { Calendar } from "react-date-range";
 import { addDays } from 'date-fns'
+const BASE_API_URL = 'http://localhost:8000/api/v1/tours';
 
 
 
 const TourDetails = () => {
   const [tour, setTour] = useState(null);
+  const [locationsArray, setLocationsArray] = useState();
   // const [tour, setTour] = useState([]);
   // const [tourStartingLocation, setTourStartingLocation] = useState();
   // const [tourEndingLocation, setTourEndingLocation] = useState();
@@ -61,6 +65,40 @@ const TourDetails = () => {
     }
     fetchItems();
   }, [id])
+
+  // const paymentRequestHandler = async () => {
+  //   try {
+  //     const response = await axios.post(
+  //       `http://localhost:8000/api/v1/bookings/payments`,
+  //       { user, tour }
+  //     );
+  //     window.location.href = response.data.data.session.url;
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
+  const getLocations = async () => {
+    try {
+      const {
+        data: {
+          data: {
+            tour: { locations },
+          },
+        },
+      } = await axios.get(`${BASE_API_URL}/62db21b64557bb614d18bf07 `);
+
+      setLocationsArray(locations);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      getLocations();
+    };
+  }, []);
 
   // useEffect(() => {
   //   setendDate(addDays(startDate, +tour.duration - 1))
@@ -172,11 +210,16 @@ const TourDetails = () => {
                 />
               </div>
 
-              <button className='button'>Book Now</button>
+              <button className='booknow-btn'>Book Now</button>
             </div>
           </div>
         </div>
 
+        <h3 className="Details-title">Map</h3>
+        <div className='map-container'>
+
+          {locationsArray && <Map locations={locationsArray} />}
+        </div>
         <div className="Reviews">
           <h3>Reviews</h3>
           <div className="Tour-Review">
@@ -192,6 +235,7 @@ const TourDetails = () => {
           </div>
         </div>
       </div>
+
 
 
     </>

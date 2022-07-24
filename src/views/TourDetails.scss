@@ -51,7 +51,7 @@
           text-align: center;
         }
 
-        & .button {
+        & .booknow-btn {
           text-align: center;
           background-color: rgb(201, 40, 40);
           color: white;
@@ -63,7 +63,7 @@
           transition: width .25s ease-in-out
         }
 
-        & .button:hover {
+        & .booknow-btn:hover {
           width: 200px;
           border: 1px solid black;
 
@@ -206,4 +206,16 @@
     }
   }
 
+  .Details-title {
+    margin: 30px 0;
+    color: #2B65EC;
+    font-size: 1.5rem;
+  }
+
+  .map-container {
+    height: 50vh;
+    margin: auto;
+    margin: 30px 0;
+
+  }
 }
