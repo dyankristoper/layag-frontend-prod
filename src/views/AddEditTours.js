@@ -1,6 +1,6 @@
 import './AddEditTours.scss';
-import { useState, /* useEffect */ } from 'react'
-// import { useParams } from 'react-router'
+import { useState, useEffect } from 'react'
+import { useParams } from 'react-router';
 import axios from 'axios';
 
 const AddEditTours = () => {
@@ -14,7 +14,7 @@ const AddEditTours = () => {
   const [tourMaxGroupSize, setTourMaxGroupSize] = useState(0);
   const [tourImage, setTourImage] = useState('');
   const [tourDifficulty, setTourDifficulty] = useState('');
-  // const { id } = useParams();
+  const { id } = useParams();
 
 
 
@@ -22,16 +22,16 @@ const AddEditTours = () => {
 
     const addingItems = async () => {
       try {
-        // let response;
-        // if (id) {
-        //   response = await axios.put(`http://localhost:8000/api/v1/tours/${id}`, {
-        //     name: tourName, duration: tourDuration, maxGroupSize: tourMaxGroupSize, difficulty: tourDifficulty, price: tourPrice, summary: tourSummary, description: tourDescription, imageCover: tourImage
-        //   });
-        // } else {
-        const response = await axios.post('http://localhost:8000/api/v1/tours', {
+        let response;
+        if (id) {
+          response = await axios.put(`http://localhost:8000/api/v1/tours/${id}`, {
+            name: tourName, duration: tourDuration, maxGroupSize: tourMaxGroupSize, difficulty: tourDifficulty, price: tourPrice, summary: tourSummary, description: tourDescription, imageCover: tourImage
+          });
+        } else {
+          response = await axios.post('http://localhost:8000/api/v1/tours', {
           name: tourName, duration: tourDuration, maxGroupSize: tourMaxGroupSize, difficulty: tourDifficulty, price: tourPrice, summary: tourSummary, description: tourDescription, imageCover: tourImage, locations: [], startLocation: ''
         });
-
+      }
 
         console.log(response.data);
 
@@ -45,31 +45,32 @@ const AddEditTours = () => {
     console.log(tourName, tourSummary, tourDescription, tourDuration, tourPrice, tourMaxGroupSize, tourImage, tourDifficulty)
   }
 
-  // useEffect(() => {
-  //   if (id) {
-  //     const getById = async () => {
-  //       try {
-  //         const response = await axios.get(
-  //           `http://localhost:8000/api/tours/${id}`
-  //         );
+  useEffect(() => {
+    if (id) {
+      const getById = async () => {
+        try {
+          const response = await axios.get(
+            `http://localhost:8000/api/v1/tours/${id}`
+          );
+            console.log(response.data.data.tour);
+          if (response.data.data.tour) {
+            setTourName(response.data.data.tour.name);
+            setTourSummary(response.data.data.tour.summary);
+            setTourDescription(response.data.data.tour.description);
+            setTourDuration(response.data.data.tour.duration);
+            setTourPrice(response.data.data.tour.price);
+            setTourImage(response.data.data.tour.imageCover);
+            setTourDifficulty(response.data.data.tour.difficulty);
+            setTourMaxGroupSize(response.data.data.tour.maxGroupSize);
+          }
+        } catch (error) {
+          console.log(error.message);
+        }
+      };
 
-  //         if (response.data.data.tours) {
-  //           setTourId(response.data.data.tours._id);
-  //           setTourName(response.data.data.tours.name);
-  //           setTourSummary(response.data.data.tours.summary);
-  //           setTourDescription(response.data.data.tours.description);
-  //           setTourDuration(response.data.data.tours.duration);
-  //           setTourPrice(response.data.data.tours.price);
-  //           setTourImage(response.data.data.tours.imageCover);
-  //         }
-  //       } catch (error) {
-  //         console.log(error.message);
-  //       }
-  //     };
-
-  //     getById();
-  //   }
-  // }, [id]);
+      getById();
+    }
+  }, [id]);
 
 
 
@@ -77,18 +78,18 @@ const AddEditTours = () => {
     <div className="AddEditTours">
       <div className="container" >
         <h3><span>Add</span> new tour</h3>
-        <input className="AddEdit-input" type="text" placeholder='Enter tour name' onChange={e => setTourName(e.target.value)} />
-        <textarea className="AddEdit-description AddEdit-input" placeholder='Enter Summary' onChange={e => setTourSummary(e.target.value)} />
-        <textarea className="AddEdit-description AddEdit-input" placeholder='Enter Description' onChange={e => setTourDescription(e.target.value)} />
+        <input className="AddEdit-input" value={tourName} type="text" placeholder='Enter tour name' onChange={e => setTourName(e.target.value)} />
+        <textarea className="AddEdit-description AddEdit-input" value={tourSummary} placeholder='Enter Summary' onChange={e => setTourSummary(e.target.value)} />
+        <textarea className="AddEdit-description AddEdit-input" value={tourDescription} placeholder='Enter Description' onChange={e => setTourDescription(e.target.value)} />
       </div>
       <div className="container">
         <div className="duration-price">
-          <input className="duration-price__input" type="text" placeholder='Enter Duration' onChange={e => setTourDuration(e.target.value)} />
-          <input className="duration-price__input" type="text" placeholder='Enter Price' onChange={e => setTourPrice(e.target.value)} />
-          <input className="duration-price__input" type="text" placeholder='Enter Max group size' onChange={e => setTourMaxGroupSize(e.target.value)} />
-          <input className="duration-price__input" type="text" placeholder='Enter Difficulty' onChange={e => setTourDifficulty(e.target.value)} />
+          <input className="duration-price__input" type="text" value={tourDuration} placeholder='Enter Duration' onChange={e => setTourDuration(e.target.value)} />
+          <input className="duration-price__input" type="text" value={tourPrice} placeholder='Enter Price' onChange={e => setTourPrice(e.target.value)} />
+          <input className="duration-price__input" type="text" value={tourMaxGroupSize} placeholder='Enter Max group size' onChange={e => setTourMaxGroupSize(e.target.value)} />
+          <input className="duration-price__input" type="text" value={tourDifficulty} placeholder='Enter Difficulty' onChange={e => setTourDifficulty(e.target.value)} />
         </div>
-        <input className="AddEdit-input" type="text" placeholder='Enter Image cover' onChange={e => setTourImage(e.target.value)} />
+        <input className="AddEdit-input" type="text" placeholder='Enter Image cover' value={tourImage} onChange={e => setTourImage(e.target.value)} />
         <button type="button" className="AddEdit-btn" onClick={onClick}>Save</button>
       </div>
     </div>
