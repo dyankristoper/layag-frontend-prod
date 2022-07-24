@@ -29,6 +29,7 @@ const App = () => {
           {/* <Route path='/admin/dashboard' element={AdminDashboard} /> */}
         </Route>
         <Route path="/addTour" element={<AddEditTours />} />
+        <Route path="/addTour/:id" element={<AddEditTours />} />
         <Route path="/tourHistory" element={<TourHistory />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>

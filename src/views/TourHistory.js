@@ -57,7 +57,7 @@ const TourHistory = () => {
                   <td>{t.ratingsAverage}</td>
                   <td>
                     <div className="Tour-History__actions">
-                      <td><img className="Tour-History__actions__edit" src="https://cdn-icons-png.flaticon.com/512/1159/1159633.png" alt="data1" /></td>
+                      <td><Link to={`/addTour/${t.id}`}><img className="Tour-History__actions__edit" src="https://cdn-icons-png.flaticon.com/512/1159/1159633.png" alt="data1" /></Link></td>
                       <td><img className="Tour-History__actions__delete" src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png" alt="data2" /></td>
                     </div>
                   </td>
