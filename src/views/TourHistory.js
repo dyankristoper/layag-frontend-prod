@@ -1,36 +1,72 @@
 import './TourHistory.scss';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import {useState, useEffect} from "react";
+import axios from 'axios';
 
 const TourHistory = () => {
+  const [tours, setTours] = useState([]);
+  
+
+  useEffect(() => {
+    const getTours = async () => {
+      try {
+        const getData = await axios.get(
+          `http://localhost:8000/api/v1/tours`
+        );     
+        setTours(getData.data.data.tours);   
+
+      } catch (err) {
+        console.log(err);
+      } 
+    };
+    getTours();
+  }, []);
+
   return (
     <div className="Tour-History">
-      <h3>My tours</h3>
+      <h3>Tours</h3>
       <Link to="/addTour">
         <button type="button">Add Tour+</button>
       </Link>
       <div className="Tour-History-Content">
         <table>
-          <tr className="TourHistory-Head">
+          <thead>
+            <tr>
 
-            <th> Tour Name </th>
-            <th> Details </th>
-            <th> Prices </th>
-            <th> Date of Tours </th>
-            <th> Actions </th>
+              <th> Image</th>
+              <th> Tour Name </th>
+              <th> Address</th>
+              <th> Price</th>
+              <th> Rating </th>
+              <th> Actions </th>
 
-          </tr>
-          <tr>
-            <td>6D5N South Cebu Tours</td>
-            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tincidunt praesent semper feugiat nibh sed pulvinar proin gravida. Orci nulla pellentesque dignissim enim sit amet venenatis urna.</td>
-            <td>4399.66</td>
-            <td>07.22.2022</td>
-            <td>
-              <div className="Tour-History__actions">
-                <td><img className="Tour-History__actions__edit" src="https://cdn-icons-png.flaticon.com/512/1159/1159633.png" alt="data1" /></td>
-                <td><img className="Tour-History__actions__delete" src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png" alt="data2" /></td>
-              </div>
-            </td>
-          </tr>
+            </tr>
+          </thead>
+          <tbody>
+
+            {
+              tours && tours.map((t) => {
+
+                return(
+
+              <tr>
+                  <td><img src={t.imageCover}/></td>
+                  <td>{t.name}</td>
+                  <td>{t.startLocation.address}</td>
+                  <td>Php:{t.price}</td>
+                  <td>{t.ratingsAverage}</td>
+                  <td>
+                    <div className="Tour-History__actions">
+                      <td><img className="Tour-History__actions__edit" src="https://cdn-icons-png.flaticon.com/512/1159/1159633.png" alt="data1" /></td>
+                      <td><img className="Tour-History__actions__delete" src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png" alt="data2" /></td>
+                    </div>
+                  </td>
+              </tr>
+                )
+              })
+
+            }
+          </tbody>
         </table>
       </div>
     </div>
