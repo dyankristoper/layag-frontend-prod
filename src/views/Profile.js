@@ -152,9 +152,9 @@ const Profile = () => {
         </div>
       </div>
 
-      <div className='Tour-History'>
+      <div className='Profile-History'>
         <h3>Tours</h3>
-        <div className='Tour-History-Content'>
+        <div className='Profile-History-Content'>
           <table>
             <thead>
               <tr>
@@ -187,7 +187,7 @@ const Profile = () => {
                       <td>{endDate}</td>
                       <td>
                         {today > endDate && !t.isReviewed ? (
-                          <div className='Tour-History__actions'>
+                          <div className='Profile-History__actions'>
                             <button
                               type='button'
                               onClick={() => {
