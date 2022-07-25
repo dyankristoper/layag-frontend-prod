@@ -5,18 +5,43 @@ import Header from '../components/Header';
 import { isAuthenticated } from '../authentication/Authentication';
 import { Link } from 'react-router-dom';
 import Rating from '../components/Profile Component/Rating';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
+import axios from "axios";
+import { format } from 'date-fns';
 
 const Profile = () => {
   const {
-    user: { name, email },
+    user: { _id,name, email },
   } = isAuthenticated();
 
   const [showModal, setshowModal] = useState(false);
+  const [userTour, setuserTour] = useState([]);
+  const [userBooking, setuserBooking] = useState([]);
+  const today = format(new Date(), "MM/dd/yy");
+
+
+  useEffect(() => {
+    getData();
+  },[])
+
+  const getData = async () => {
+    try{
+      const response = await axios.get(`http://localhost:8000/api/v1/bookings/my-bookings/${_id}`);
+      setuserTour(response.data.data.bookings);
+      console.log(response.data.data.bookings);
+    }catch(err){
+      console.log(err);
+    }
+  }
 
 
   const onChange = () => {
     setshowModal(showModal => !showModal);
+  }
+
+  const onclick = (bookingHistory) => {
+    setuserBooking(bookingHistory);
+    setshowModal( showModal => !showModal );
   }
 
   return (
@@ -129,9 +154,6 @@ const Profile = () => {
 
       <div className="Tour-History">
       <h3>Tours</h3>
-      <Link to="/addTour">
-        <button type="button">Add Tour+</button>
-      </Link>
       <div className="Tour-History-Content">
         <table>
           <thead>
@@ -139,28 +161,43 @@ const Profile = () => {
 
               <th> Image</th>
               <th> Tour Name </th>
-              <th> Address</th>
               <th> Price</th>
-              <th> Rating </th>
+              <th> Tour Start </th>
+              <th> Tour End</th>
               <th> Actions </th>
 
             </tr>
           </thead>
           <tbody>
-              <tr>
-                  <td><img src=""/></td>
-                  <td>asjdashdwadads asdas</td>
-                  <td>asjdashdwadads asdas</td>
-                  <td>4400</td>
-                  <td>123121241</td>
-                  <td>
-                    <div className="Tour-History__actions">
-                      {/* <td><img className="Tour-History__actions__edit" src="https://cdn-icons-png.flaticon.com/512/1159/1159633.png" alt="data1" /></td> */}
-                      {/* <td><img className="Tour-History__actions__delete" src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png" alt="data2" /></td> */}
-                      <button type='button' onClick={() => setshowModal(showModal => !showModal)}>Write a reivew</button>
-                    </div>
-                  </td>
-              </tr>
+            {
+              userTour && userTour.map((t) => {
+                let startDate = format(new Date(t.tourStart),"MM/dd/yy");
+                let endDate = format(new Date(t.tourEnd),"MM/dd/yy");
+                return(
+                <tr>
+                 <td><img src={t.tour.imageCover} alt={t.tour.name} /></td>
+                   <td>{t.tour.name}</td>
+                   <td>&#8369; {t.price.toLocaleString("en-us",{minimumFractionDigits:2})}</td>
+                   <td>{startDate}</td>
+                   <td>{endDate}</td>
+                         <td>     
+                          {
+                            today  > endDate &&
+                              <div className="Tour-History__actions">
+                              <button type='button' onClick={() => {
+                               onclick(t)
+                              }}>Write a reivew</button>
+                              </div>
+                          }
+                           
+                         </td>
+                     </tr>  
+                )
+
+
+              })
+                 
+            }
                 
           </tbody>
         </table>
@@ -170,7 +207,7 @@ const Profile = () => {
     {
       showModal && 
       <div className='Rating-modal'>
-        <Rating onChange={onChange}/>
+        <Rating onChange={onChange} userBooking={userBooking}/>
       </div>
 
     }
