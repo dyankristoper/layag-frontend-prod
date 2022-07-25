@@ -70,7 +70,8 @@ const TourDetails = () => {
 
   const paymentRequestHandler = async () => {
     try {
-      const tourStartBase = moment().subtract(10, 'days').startOf('day');
+      // const tourStartBase = moment().subtract(10, 'days').startOf('day');
+      const tourStartBase = moment(startDate).startOf('day');
       const tourStartFormatted = tourStartBase.format();
       const tourEndFormatted = tourStartBase
         .add(tour.duration, 'days')
