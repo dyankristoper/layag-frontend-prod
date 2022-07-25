@@ -99,12 +99,11 @@
               
                     & .stars{
                         display: inline-block;
-                        
-                        & svg{
-                            width: 20px;
-                            fill: #f2b91f;
-   
+
+                        & input[type="radio"] {
+                            display: none;
                         }
+                        
                     }
 
                     & h4{

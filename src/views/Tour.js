@@ -1,15 +1,15 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router";
 import "./Tours.scss";
 import Header from "../components/Header";
 import SearchBar from "../components/Home Component/SearchBar";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { FaStar } from "react-icons/fa";
 
 const Tour = () => {
   const [tours, setTours] = useState([]);
   const [results, setResult] = useState([]);
-  const [background, setBackground] = useState();
   const { id } = useParams();
 
   useEffect(() => {
@@ -20,25 +20,18 @@ const Tour = () => {
         );
 
         const imageCovers = getData.data.data.tours.map((el) => el.imageCover);
-       
+
         setTours(getData.data.data.tours);
         setResult(getData.data);
-        setBackground(imageCovers);
 
         console.log(imageCovers);
-      
-
       } catch (err) {
         console.log(err);
       }
-
-     
     };
 
     getTours();
   }, [id]);
-
-
 
   return (
     <>
@@ -47,7 +40,8 @@ const Tour = () => {
         {/* <div className="Tour__hero" ></div> */}
         <div className="Tour__Title">
           <h3>
-            {results.results} Tours Found In <span>{id[0].toUpperCase() + id.substring(1)}</span>
+            {results.results} Tours Found In{" "}
+            <span>{id[0].toUpperCase() + id.substring(1)}</span>
           </h3>
         </div>
 
@@ -107,49 +101,50 @@ const Tour = () => {
             {tours &&
               tours.map((t) => {
                 return (
-
-                  <Link to ={`/tourdetails/${t.id}`} >
-                  <div className="details-section__choices" key={t.id}>
-                    <div className="image">
-                      <img
-                        src={t.images[0]}
-                        alt={t.name}
-                      />
-                    </div>
-                    <div className="details">
-                      <h3>{t.name}</h3>
-
-                      <div class="stars">
-                        <svg viewBox="0 0 576 512" width="100" title="star">
-                          <path d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z" />
-                        </svg>
-                        <svg viewBox="0 0 576 512" width="100" title="star">
-                          <path d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z" />
-                        </svg>
-                        <svg viewBox="0 0 576 512" width="100" title="star">
-                          <path d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z" />
-                        </svg>
-                        <svg viewBox="0 0 576 512" width="100" title="star">
-                          <path d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z" />
-                        </svg>
-                        <svg viewBox="0 0 576 512" width="100" title="star">
-                          <path d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z" />
-                        </svg>
-
-                        <span className="TourPackages-list__rate"> 5</span>
-                        <span className="TourPackages-list__review">
-                          ( 150 reviews )
-                        </span>
+                  <Link to={`/tourdetails/${t.id}`}>
+                    <div className="details-section__choices" key={t.id}>
+                      <div className="image">
+                        <img src={t.images[0]} alt={t.name} />
                       </div>
-                      <h4>Details</h4>
+                      <div className="details">
+                        <h3>{t.name}</h3>
 
-                      <p>
-                        {t.summary}
-                      </p>
+                        <div class="stars">
+                          {[...Array(5)].map((star, i) => {
+                            const ratingValue = i + 1;
+                            return (
+                              <>
+                                <input
+                                  type="radio"
+                                  name="rating"
+                                  value={t.ratingsAverage}
+                                  readOnly
+                                />
+                                <FaStar
+                                  size={25}
+                                  className="star"
+                                  color={
+                                    ratingValue <= t.ratingsAverage
+                                      ? "#ffc107"
+                                      : "#e4e5e9"
+                                  }
+                                />
+                              </>
+                            );
+                          })}
 
-                      <h4 className="price">Price:{t.price}</h4>
+                          <span className="TourPackages-list__rate"> {t.ratingsAverage}</span>
+                          <span className="TourPackages-list__review">
+                            ( {t.ratingsQuantity} reviews )
+                          </span>
+                        </div>
+                        <h4>Details</h4>
+
+                        <p>{t.summary}</p>
+
+                        <h4 className="price">Price:{t.price}</h4>
+                      </div>
                     </div>
-                  </div>
                   </Link>
                 );
               })}
