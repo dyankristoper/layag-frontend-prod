@@ -3,14 +3,18 @@ import { FaStar } from "react-icons/fa";
 import { useState } from "react";
 import "./Rating.scss";
 
-const Rating = () => {
+const Rating = ({onChange}) => {
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
+
+  const onclick = () => {
+    onChange();
+  }
 
   return (
     <div className="Rating">
       <div>
-        <img src="https://cdn-icons-png.flaticon.com/512/7644/7644639.png" alt="" />
+        <img src="https://cdn-icons-png.flaticon.com/512/7644/7644639.png" onClick={onclick} alt="close button" />
         <h3>Give us a feedback!</h3>
       </div>
       <div className="Rating__details">

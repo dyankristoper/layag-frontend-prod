@@ -5,11 +5,19 @@ import Header from '../components/Header';
 import { isAuthenticated } from '../authentication/Authentication';
 import { Link } from 'react-router-dom';
 import Rating from '../components/Profile Component/Rating';
+import {useState} from 'react';
 
 const Profile = () => {
   const {
     user: { name, email },
   } = isAuthenticated();
+
+  const [showModal, setshowModal] = useState(false);
+
+
+  const onChange = () => {
+    setshowModal(showModal => !showModal);
+  }
 
   return (
     <>
@@ -149,7 +157,7 @@ const Profile = () => {
                     <div className="Tour-History__actions">
                       {/* <td><img className="Tour-History__actions__edit" src="https://cdn-icons-png.flaticon.com/512/1159/1159633.png" alt="data1" /></td> */}
                       {/* <td><img className="Tour-History__actions__delete" src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png" alt="data2" /></td> */}
-                      <button>Write a reivew</button>
+                      <button type='button' onClick={() => setshowModal(showModal => !showModal)}>Write a reivew</button>
                     </div>
                   </td>
               </tr>
@@ -158,7 +166,16 @@ const Profile = () => {
         </table>
       </div>
     </div>
-    <Rating />
+
+    {
+      showModal && 
+      <div className='Rating-modal'>
+        <Rating onChange={onChange}/>
+      </div>
+
+    }
+    
+  
     </>
   );
 };
