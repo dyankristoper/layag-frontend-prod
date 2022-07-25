@@ -6,12 +6,12 @@ import "./TopTours.scss";
 function TopTours() {
   const places = [
     {
-      name: 'Aklan',
+      name: 'Manila',
       image:
         'https://www.leeabbamonte.com/wp-content/uploads/2015/02/IMG_1291-1024x1024.jpg',
     },
     {
-      name: 'Boracay',
+      name: 'Rizal',
       image:
         'http://www.traveltothephilippines.info/wp-content/uploads/2019/09/Bohol-Chocolate-Hills2.jpg',
     },
