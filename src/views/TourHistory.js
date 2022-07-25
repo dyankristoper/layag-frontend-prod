@@ -22,6 +22,14 @@ const TourHistory = () => {
     getTours();
   }, []);
 
+  const deleteHandler = async (id) => {
+     await axios.delete(`http://localhost:8000/api/v1/tours/${id}`);
+   const updatedData = tours.filter((t) => t.id !== id);
+   setTours(updatedData);
+  }
+
+
+
   return (
     <div className="Tour-History">
       <h3>Tours</h3>
@@ -58,7 +66,7 @@ const TourHistory = () => {
                   <td>
                     <div className="Tour-History__actions">
                       <td><Link to={`/addTour/${t.id}`}><img className="Tour-History__actions__edit" src="https://cdn-icons-png.flaticon.com/512/1159/1159633.png" alt="data1" /></Link></td>
-                      <td><img className="Tour-History__actions__delete" src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png" alt="data2" /></td>
+                      <td><img className="Tour-History__actions__delete" onClick={() => {deleteHandler(t.id)}}src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png" alt="data2" /></td>
                     </div>
                   </td>
               </tr>
