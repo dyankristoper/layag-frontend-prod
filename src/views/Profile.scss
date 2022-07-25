@@ -130,7 +130,7 @@
         position: relative;
         font-family: $primary-font;
       
-        button {
+        & button {
           position: absolute;
           right: 20px;
           width: 150px;
@@ -198,7 +198,12 @@
                       width: 30px;
                       cursor: pointer;
                     }
+                    button{
+                      background-color: none;
+                    }
                   }
+
+                
         
                 }
               }
@@ -220,4 +225,12 @@
 
 
 
+}
+
+.Rating-modal{
+  background-color: rgba(0, 0, 0, 0.753);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top:0;
 }
