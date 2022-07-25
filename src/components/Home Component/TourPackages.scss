@@ -56,6 +56,7 @@
 
             &__rate {
                 color: #f18a23;
+                margin-left: 15px;
             }
 
             &__location {
@@ -67,6 +68,10 @@
                 color: rgb(144, 144, 144);
                 font-size: .7rem;
                 margin-left: 12px;
+
+                span {
+                    color: #2B65EC;
+                }
             }
 
             h5 {
@@ -103,7 +108,8 @@
         position: relative;
         white-space: nowrap;
 
-        & input[type="radio"]{
+
+        & input[type="radio"] {
             display: none;
         }
     }
