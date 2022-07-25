@@ -3,9 +3,10 @@ import { FaStar } from "react-icons/fa";
 import { useState } from "react";
 import "./Rating.scss";
 
-const Rating = ({onChange}) => {
+const Rating = ({onChange, userBooking}) => {
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
+  const [tourDetails, setTourDetails]= useState(userBooking);
 
   const onclick = () => {
     onChange();
@@ -21,7 +22,7 @@ const Rating = ({onChange}) => {
 
         <div className="Rating__details-name">
           <label>Tour Name</label>
-          <input type="text" readOnly />
+          <input type="text" value={tourDetails.tour.name} readOnly />
         </div>
 
         <label className="Rating__details-rate">Rate</label>
