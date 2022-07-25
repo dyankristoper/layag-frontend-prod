@@ -1,4 +1,6 @@
 import './TourDetails.scss';
+import 'react-date-range/dist/styles.css';
+import 'react-date-range/dist/theme/default.css';
 import startingIcon from '../components/Images/starting.png';
 import endingIcon from '../components/Images/ending.png';
 import durationIcon from '../components/Images/duration.png';
@@ -8,12 +10,15 @@ import Map from '../components/TourDetail components/Map';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import moment from 'moment';
 import { Calendar } from 'react-date-range';
 import { addDays } from 'date-fns';
+import { isAuthenticated } from '../authentication/Authentication';
 
 const TourDetails = () => {
   const [tour, setTour] = useState(null);
   const [locationsArray, setLocationsArray] = useState();
+  const { user } = isAuthenticated();
   // const [tour, setTour] = useState([]);
   // const [tourStartingLocation, setTourStartingLocation] = useState();
   // const [tourEndingLocation, setTourEndingLocation] = useState();
@@ -37,7 +42,7 @@ const TourDetails = () => {
   const { locations, duration, images, difficulty, description } = tour || {};
 
   const endDate = addDays(startDate, +duration - 1);
-  console.log(endDate);
+  // console.log(endDate);
   useEffect(() => {
     const fetchItems = async () => {
       try {
@@ -62,6 +67,34 @@ const TourDetails = () => {
     };
     fetchItems();
   }, [id]);
+
+  const paymentRequestHandler = async () => {
+    try {
+      const tourStartBase = moment().subtract(10, 'days').startOf('day');
+      const tourStartFormatted = tourStartBase.format();
+      const tourEndFormatted = tourStartBase
+        .add(tour.duration, 'days')
+        .endOf('day')
+        .format();
+
+      console.log(tourStartFormatted, tourEndFormatted);
+
+      const response = await axios.post(
+        `http://localhost:8000/api/v1/bookings/payments`,
+        {
+          user,
+          tour,
+          tourStart: tourStartFormatted,
+          tourEnd: tourEndFormatted,
+        }
+      );
+
+      console.log(response);
+      window.location.href = response.data.data.session.url;
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   // const paymentRequestHandler = async () => {
   //   try {
@@ -98,7 +131,7 @@ const TourDetails = () => {
 
   // }, [tourImages])
 
-  console.log(tour);
+  // tour && console.log(tour);
   if (!tour) {
     return null;
   }
@@ -180,7 +213,9 @@ const TourDetails = () => {
                 />
               </div>
 
-              <button className='booknow-btn'>Book Now</button>
+              <button className='booknow-btn' onClick={paymentRequestHandler}>
+                Book Now
+              </button>
             </div>
           </div>
         </div>
