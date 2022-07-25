@@ -2,14 +2,38 @@ import React from "react";
 import { FaStar } from "react-icons/fa";
 import { useState } from "react";
 import "./Rating.scss";
+import axios from"axios";
 
-const Rating = ({onChange, userBooking}) => {
+const Rating = ({onChange, userBooking, userID}) => {
   const [rating, setRating] = useState(null);
+  const [review, setReview] = useState();
   const [hover, setHover] = useState(null);
   const [tourDetails, setTourDetails]= useState(userBooking);
 
   const onclick = () => {
     onChange();
+  }
+
+  const onchange = () => {
+    let addData = {
+      review: review,
+      rating: rating,
+      tour: tourDetails.tour._id,
+      user: userID,
+      booking: tourDetails._id
+    }
+    if(rating && review){
+    axios.post("http://localhost:8000/api/v1/reviews", addData).then((response) => {
+      return axios.patch(`http://localhost:8000/api/v1/bookings/${tourDetails._id}`, {isReviewed : true})
+    }).then((response) => {
+      console.log(response);
+    })
+    
+    setReview('');  
+    onChange();
+    }else{
+
+    }
   }
 
   return (
@@ -53,9 +77,9 @@ const Rating = ({onChange, userBooking}) => {
         </div>
 
         <div className="Rating__details-comment">
-          <textarea placeholder="Leave a comment..." />
+          <textarea placeholder="Leave a comment..." value={review} onChange={e => setReview(e.target.value)}/>
         </div>
-        <button type="button" className="Rating__details-btn">Rate now</button>
+        <button type="button" className="Rating__details-btn" onClick={() => onchange()}>Rate now</button>
       </div>
       <h3 >Thank you!</h3>
     </div>

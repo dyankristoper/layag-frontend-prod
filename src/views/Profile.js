@@ -182,12 +182,17 @@ const Profile = () => {
                    <td>{endDate}</td>
                          <td>     
                           {
-                            today  > endDate &&
+                            (today  > endDate) && (!t.isReviewed) ?
                               <div className="Tour-History__actions">
                               <button type='button' onClick={() => {
                                onclick(t)
                               }}>Write a reivew</button>
                               </div>
+
+                              : (today  > endDate) && (t.isReviewed) ?
+                              <p>Review Done</p>
+                              :
+                              <p>In Progress</p>
                           }
                            
                          </td>
@@ -207,7 +212,7 @@ const Profile = () => {
     {
       showModal && 
       <div className='Rating-modal'>
-        <Rating onChange={onChange} userBooking={userBooking}/>
+        <Rating onChange={onChange} userBooking={userBooking} userID={_id}/>
       </div>
 
     }
