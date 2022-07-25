@@ -10,55 +10,14 @@
         font-size: 3rem;
     }
 
-    &__modal {
-        width: 250px;
-        height: 150px;
-        background-color: white;
-        @include flex(column, nowrap, center, center);
-        position: absolute;
-        right: 0;
-        margin-right: 620px;
-        margin-top: 10px;
-
-        & img {
-            width: 30px;
-            cursor: pointer;
-        }
-
-        & p {
-            color: black;
-        }
-
-        & .people {
-            @include flex(row, nowrap, center, center);
-            gap: 10px;
-        }
-    }
-
     &__options {
         @include flex(row, wrap, center, center);
         background-color: #2f93894a;
-        width: 50%;
+        width: 40%;
         padding: 20px 0;
         margin: -20px auto;
         gap: 10px;
 
-
-        & label {
-            font-size: 1.3rem;
-            color: white;
-        }
-
-        & button {
-            margin-top: 20px;
-            height: 30px;
-            width: 100px;
-            border-radius: 3px;
-            border: none;
-            background-color: rgb(4, 122, 23);
-            color: white;
-            font-weight: bold;
-        }
 
         & .searchForm {
             @include flex(column, nowrap, flex-start, flex-start);
@@ -84,7 +43,7 @@
 
             &__text {
 
-                width: 250px;
+                width: 500px;
                 height: 40px;
                 background-color: white;
                 @include flex(row, nowrap, center, center);
@@ -92,7 +51,7 @@
 
                 & img {
                     width: 25px;
-                    margin-left: -20px;
+
                 }
 
                 & input {
@@ -102,76 +61,11 @@
                     text-decoration: none;
                     background-color: transparent;
                     outline: none;
-
-                }
-
-
-
-            }
-
-
-
-            &__guest {
-                width: 250px;
-                height: 40px;
-                background-color: white;
-                @include flex(row, nowrap, space-between, center);
-                cursor: pointer;
-
-                & img {
-                    width: 25px;
+                    width: 450px;
                     padding-left: 10px;
-                }
 
-                & .image2 {
-                    width: 15px;
-                    padding-right: 10px;
-                }
-
-                & input {
-                    border: none;
-                    text-decoration: none;
-                    background-color: transparent;
-                    outline: none;
-                    cursor: pointer;
 
                 }
-            }
-
-            &__date {
-                width: 250px;
-                height: 40px;
-                background-color: white;
-                @include flex(row, nowrap, flex-start, center);
-
-                & .arrival {
-                    @include flex(row, nowrap, flex-start, center);
-
-                    & img {
-                        width: 25px;
-                        padding-left: 10px;
-                        cursor: pointer;
-
-                    }
-
-                    & input {
-                        height: 30px;
-                        width: 60px;
-                        padding-left: 10px;
-                        border: none;
-                        text-decoration: none;
-                        background-color: transparent;
-                        outline: none;
-                        color: gray;
-                        cursor: pointer;
-
-                    }
-                }
-
-                & p {
-                    color: black;
-                }
-
 
             }
 
@@ -179,21 +73,6 @@
         }
 
     }
-
-    & .calendarWrap {
-        display: inline-block;
-        position: relative;
-    }
-
-    & .calendarElement {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        top: 0px;
-        border: 1px solid #ccc;
-        z-index: 999;
-    }
-
 
 
 }
