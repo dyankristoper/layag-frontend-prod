@@ -1,19 +1,15 @@
-
-import './TourDetails.scss'
-import startingIcon from '../components/Images/starting.png'
-import endingIcon from '../components/Images/ending.png'
-import durationIcon from '../components/Images/duration.png'
-import difficultyIcon from '../components/Images/difficulty.png'
+import './TourDetails.scss';
+import startingIcon from '../components/Images/starting.png';
+import endingIcon from '../components/Images/ending.png';
+import durationIcon from '../components/Images/duration.png';
+import difficultyIcon from '../components/Images/difficulty.png';
 import Header from '../components/Header';
-import Map from '../components/TourDetail components/Map'
-import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import axios from 'axios'
-import { Calendar } from "react-date-range";
-import { addDays } from 'date-fns'
-const BASE_API_URL = 'http://localhost:8000/api/v1/tours';
-
-
+import Map from '../components/TourDetail components/Map';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import { Calendar } from 'react-date-range';
+import { addDays } from 'date-fns';
 
 const TourDetails = () => {
   const [tour, setTour] = useState(null);
@@ -38,16 +34,19 @@ const TourDetails = () => {
   // const images = tour.length > 0 && tour.images;
   const [startDate, setstartDate] = useState(new Date());
 
-
   const { locations, duration, images, difficulty, description } = tour || {};
 
   const endDate = addDays(startDate, +duration - 1);
-  console.log(endDate)
+  console.log(endDate);
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const { data } = await axios.get(`http://localhost:8000/api/v1/tours/${id}`)
-        setTour(data.data.tour);
+        const {
+          data: {
+            data: { tour },
+          },
+        } = await axios.get(`http://localhost:8000/api/v1/tours/${id}`);
+        setTour(tour);
         // setTour(response.data.data.tour)
         // const start = response.data.data.tour.locations[0].name;
         // const end = response.data.data.tour.locations;
@@ -56,15 +55,13 @@ const TourDetails = () => {
         // setTourEndingLocation(end[end.length - 1].name)
         // setTourImages(images);
         // console.log(images)
-
-
+        setLocationsArray(tour.locations);
       } catch (error) {
-        console.log(error.message)
+        console.log(error.message);
       }
-
-    }
+    };
     fetchItems();
-  }, [id])
+  }, [id]);
 
   // const paymentRequestHandler = async () => {
   //   try {
@@ -77,28 +74,6 @@ const TourDetails = () => {
   //     console.log(err);
   //   }
   // };
-
-  const getLocations = async () => {
-    try {
-      const {
-        data: {
-          data: {
-            tour: { locations },
-          },
-        },
-      } = await axios.get(`${BASE_API_URL}/62db21b64557bb614d18bf07 `);
-
-      setLocationsArray(locations);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  useEffect(() => {
-    return () => {
-      getLocations();
-    };
-  }, []);
 
   // useEffect(() => {
   //   setendDate(addDays(startDate, +tour.duration - 1))
@@ -123,26 +98,21 @@ const TourDetails = () => {
 
   // }, [tourImages])
 
-
-  console.log(tour)
+  console.log(tour);
   if (!tour) {
     return null;
   }
 
-
-
   return (
-
     <>
-
       <Header />
-      <div className="Details">
+      <div className='Details'>
         <h1>{tour.name}</h1>
-        <div className="Tour-Details">
-          <div className="Tour-Details__images">
+        <div className='Tour-Details'>
+          <div className='Tour-Details__images'>
             {images.map((src) => (
-              <div key={src} className="Tour-Details__image">
-                <img src={src} alt="" />
+              <div key={src} className='Tour-Details__image'>
+                <img src={src} alt='' />
               </div>
             ))}
             {/* <div className="Tour__image" ref={bgMain}></div>
@@ -153,50 +123,50 @@ const TourDetails = () => {
               <div className="bg" ref={bg4}></div>
             </div> */}
           </div>
-          <div className="Tour-Details__documentation">
-            <div className="Tour-Details__documentation-info">
-              <div className="Details-information">
-                <h3 className="Details-title">Details</h3>
-                <div className="Details-container">
-                  <div className="Details-container__info">
-                    <img src={startingIcon} alt="starting-point" />
+          <div className='Tour-Details__documentation'>
+            <div className='Tour-Details__documentation-info'>
+              <div className='Details-information'>
+                <h3 className='Details-title'>Details</h3>
+                <div className='Details-container'>
+                  <div className='Details-container__info'>
+                    <img src={startingIcon} alt='starting-point' />
                     <div>
                       <p>Tour starts</p>
                       {locations.length && <p>{locations[0].name}</p>}
                     </div>
                   </div>
-                  <div className="Details-container__info">
-                    <img src={endingIcon} alt="starting-point" />
+                  <div className='Details-container__info'>
+                    <img src={endingIcon} alt='starting-point' />
                     <div>
                       <p>Tour ends</p>
-                      {locations.length && <p>{locations[locations.length - 1].name}</p>}
+                      {locations.length && (
+                        <p>{locations[locations.length - 1].name}</p>
+                      )}
                     </div>
                   </div>
-                  <div className="Details-container__info">
-                    <img src={durationIcon} alt="starting-point" />
+                  <div className='Details-container__info'>
+                    <img src={durationIcon} alt='starting-point' />
                     <div>
                       <p>Duration</p>
                       <p>{duration} days</p>
                     </div>
                   </div>
-                  <div className="Details-container__info">
-                    <img src={difficultyIcon} alt="starting-point" />
+                  <div className='Details-container__info'>
+                    <img src={difficultyIcon} alt='starting-point' />
                     <div>
                       <p>Difficulty</p>
                       <p>{difficulty}</p>
                     </div>
                   </div>
-
                 </div>
               </div>
-              <div className="Details-description">
-                <h3 className="Details-title">Description</h3>
+              <div className='Details-description'>
+                <h3 className='Details-title'>Description</h3>
                 <p>{description}</p>
               </div>
             </div>
-            <div className="Tour-Details__documentation-date">
-
-              <div className="calendar" >
+            <div className='Tour-Details__documentation-date'>
+              <div className='calendar'>
                 <h3>Select Dates</h3>
                 <Calendar
                   onChange={(date) => {
@@ -206,7 +176,7 @@ const TourDetails = () => {
                   editableDateInputs={true}
                   moveRangeOnFirstSelection={false}
                   months={1}
-                  className="calendarElement"
+                  className='calendarElement'
                 />
               </div>
 
@@ -215,31 +185,37 @@ const TourDetails = () => {
           </div>
         </div>
 
-        <h3 className="Details-title">Map</h3>
+        <h3 className='Details-title'>Map</h3>
         <div className='map-container'>
-
           {locationsArray && <Map locations={locationsArray} />}
         </div>
-        <div className="Reviews">
+        <div className='Reviews'>
           <h3>Reviews</h3>
-          <div className="Tour-Review">
-            <div className="Tour-Review__image">
-              <img src="https://www.musicmundial.com/en/wp-content/uploads/2022/07/BLACKPINKs-Jennie-saves-a-store-from-bankruptcy-just-by-posting-it-on-Instagram-1140x795.jpg" alt="Jennie" />
+          <div className='Tour-Review'>
+            <div className='Tour-Review__image'>
+              <img
+                src='https://www.musicmundial.com/en/wp-content/uploads/2022/07/BLACKPINKs-Jennie-saves-a-store-from-bankruptcy-just-by-posting-it-on-Instagram-1140x795.jpg'
+                alt='Jennie'
+              />
             </div>
-            <div className="Tour-Review__details">
-              <p className="Tour-Review__details__name">Kathleen Sy</p>
-              <p className="Tour-Review__details__rating"></p>
-              <p className="Tour-Review__details__date">23/05/2022</p>
-              <p className="Tour-Review__details__comment">Great activity. Gives you the chance to explore and learn about the lesser-popular but just as beautiful attractions of Coron. I recommend doing this activity along with Coron's famous water attractions to get a full appreciation of the island. Our guide was extremely helpful and very informative. He clearly knew what he was talking about. Definitely recommend.</p>
+            <div className='Tour-Review__details'>
+              <p className='Tour-Review__details__name'>Kathleen Sy</p>
+              <p className='Tour-Review__details__rating'></p>
+              <p className='Tour-Review__details__date'>23/05/2022</p>
+              <p className='Tour-Review__details__comment'>
+                Great activity. Gives you the chance to explore and learn about
+                the lesser-popular but just as beautiful attractions of Coron. I
+                recommend doing this activity along with Coron's famous water
+                attractions to get a full appreciation of the island. Our guide
+                was extremely helpful and very informative. He clearly knew what
+                he was talking about. Definitely recommend.
+              </p>
             </div>
           </div>
         </div>
       </div>
-
-
-
     </>
-  )
-}
+  );
+};
 
-export default TourDetails
+export default TourDetails;
