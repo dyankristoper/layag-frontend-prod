@@ -66,7 +66,7 @@ const TourPackages = () => {
                       <div class="cover"></div>
                       <span className="TourPackages-list__rate">{tour.ratingsAverage}</span>
                       <span className="TourPackages-list__review">
-                        ( 150 reviews )
+                        ({tour.ratingsQuantity}  <span>reviews</span> )
                       </span>
                     </div>
 
