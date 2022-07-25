@@ -7,6 +7,23 @@
   position: relative;
   font-family: $primary-font;
 
+  & .Message_Modal{
+    position: fixed;
+    width: 350px;
+    height: 100px;
+    background-color: #88df39;
+    top: 10%;
+    right: 40%; 
+    text-align: center;
+    transition: .3s;
+    
+    & h4{
+      margin:30px auto;
+      font-family: $primary-font;
+      font-size: 1.5rem;
+    }
+  }
+
   button {
     position: absolute;
     right: 20px;

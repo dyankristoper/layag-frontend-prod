@@ -2,9 +2,12 @@ import './TourHistory.scss';
 import { Link } from 'react-router-dom';
 import {useState, useEffect} from "react";
 import axios from 'axios';
+import { set } from 'date-fns';
 
 const TourHistory = () => {
   const [tours, setTours] = useState([]);
+  const [message, setMessage] = useState();
+  const [modal, setModal] = useState(false);
   
 
   useEffect(() => {
@@ -26,6 +29,14 @@ const TourHistory = () => {
      await axios.delete(`http://localhost:8000/api/v1/tours/${id}`);
    const updatedData = tours.filter((t) => t.id !== id);
    setTours(updatedData);
+   setMessage('Item Successfully Deleted');
+   setModal(true);
+
+   setTimeout(() => {
+    setMessage('');
+    setModal(false);
+   }, [3000]);
+
   }
 
 
@@ -36,6 +47,16 @@ const TourHistory = () => {
       <Link to="/addTour">
         <button type="button">Add Tour+</button>
       </Link>
+
+      {/* Delete Modal */}
+      {
+        modal &&
+      <div className='Message_Modal'>
+       <h4>{message}</h4>
+      </div>
+      }
+
+
       <div className="Tour-History-Content">
         <table>
           <thead>
