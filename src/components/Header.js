@@ -51,12 +51,11 @@ const Header = () => {
           </div>
         )}
         {modal && isAuthenticated() && isAuthenticated().user.role === 'user' && (
-          <div className="Header__modal">
+          <div className="Header__modal" style={{height : "120px"}}>
             <ul>
               <Link to="/profile">
                 <li>My Profile</li>
               </Link>
-              <li>Tour</li>
               <li
                 onClick={() =>
                   signout(() => {
