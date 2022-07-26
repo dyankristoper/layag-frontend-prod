@@ -72,8 +72,12 @@ const Header = () => {
         {modal && isAuthenticated() && isAuthenticated().user.role === 'admin' && (
           <div className="Header__modal">
             <ul>
-              <li>My Profile</li>
-              <li>Modify Tours</li>
+              <Link to="/profile">
+                <li>My Profile</li>
+              </Link>
+              <Link to="/tourHistory">
+                <li>Modify Tours</li>
+              </Link>
               <li
                 onClick={() =>
                   signout(() => {
