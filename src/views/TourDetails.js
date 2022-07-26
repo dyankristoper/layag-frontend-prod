@@ -252,8 +252,8 @@ const TourDetails = () => {
                   <div className='Tour-Review'>
                     <div className='Tour-Review__image'>
                     <img
-                      src='https://www.musicmundial.com/en/wp-content/uploads/2022/07/BLACKPINKs-Jennie-saves-a-store-from-bankruptcy-just-by-posting-it-on-Instagram-1140x795.jpg'
-                      alt='Jennie'
+                      src={r.user.image.path}
+                      alt={r.user.name}
                     />
                   </div>
 
