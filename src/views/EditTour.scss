@@ -18,10 +18,10 @@
     @include flex(column, nowrap, center, center);
     border: 1px solid rgb(184, 182, 182);
     height: 60vh;
-    margin: 0 0 60px 80px;
+    margin: 0 0 30px 100px;
     position: relative;
-    gap: 25px;
-    background-color: rgba(226, 226, 226, 0.459);
+    gap: 10px;
+    background-color: #e2e2e2b5;
     border-top: .1px;
     box-shadow: 2px 3px rgb(116, 115, 115);
     border-radius: 15px;
@@ -39,7 +39,7 @@
     }
 
     .AddEdit-input {
-      width: 150px;
+      width: 230px;
       height: 40px;
       border-radius: 10px;
       border: 1px solid rgb(105, 101, 101);
@@ -54,23 +54,10 @@
     }
 
 
-    .AddEdit-input:focus {
-      outline: none !important;
-      width: 80%;
-      border: 2px solid #2b65ec8f;
-
-    }
-
-    .AddEdit-input:hover {
-      width: 80%;
-      border: 2px solid #2b65ec8f;
-      outline: none !important;
-
-    }
 
     .AddEdit-description {
 
-      width: 160px;
+      width: 240px;
       height: 150px;
       transition: width 0.4s ease-in-out;
       resize: none;
@@ -84,24 +71,15 @@
       font-family: $primary-font;
     }
 
-    .AddEdit-description:focus {
-      width: 80%;
-      outline: none !important;
-      border: 2px solid #2b65ec8f;
 
-    }
 
-    .AddEdit-description:hover {
-      width: 80%;
-      border: 2px solid #2b65ec8f;
-      outline: none !important;
-    }
+
 
 
     .duration-price {
 
       &__input {
-        width: 110px;
+        width: 150px;
         height: 40px;
         border-radius: 10px;
         border: 1px solid rgb(105, 101, 101);
@@ -110,20 +88,11 @@
         margin: 10px;
         font-family: $primary-font;
         background-color: transparent;
+        outline: none;
 
       }
 
-      &__input:hover {
-        width: 150px;
-        border: 2px solid #2b65ec8f;
-        outline: none !important;
-      }
 
-      &__input:focus {
-        width: 180px;
-        border: 2px solid #2b65ec8f;
-        outline: none !important;
-      }
     }
 
     .duration-price::placeholder {
@@ -136,6 +105,7 @@
       align-self: flex-end;
       margin-right: 20px;
       height: 30px;
+      margin-top: 20px;
       cursor: pointer;
       border-radius: 8px;
       background-color: transparent;

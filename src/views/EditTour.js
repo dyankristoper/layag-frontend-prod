@@ -77,18 +77,24 @@ const EditTour = () => {
   return (
     <div className="AddEditTours">
       <div className="container" >
-        <h3><span>Add</span> new tour</h3>
+        <h3><span>Edit</span> tour</h3>
+        <label>Tour name</label>
         <input className="AddEdit-input" value={tourName} type="text" placeholder='Enter tour name' onChange={e => setTourName(e.target.value)} />
+        <label>Summary</label>
         <textarea className="AddEdit-description AddEdit-input" value={tourSummary} placeholder='Enter Summary' onChange={e => setTourSummary(e.target.value)} />
+        <label>Description</label>
         <textarea className="AddEdit-description AddEdit-input" value={tourDescription} placeholder='Enter Description' onChange={e => setTourDescription(e.target.value)} />
       </div>
       <div className="container">
-        <div className="duration-price">
-          <input className="duration-price__input" type="text" value={tourDuration} placeholder='Enter Duration' onChange={e => setTourDuration(e.target.value)} />
-          <input className="duration-price__input" type="text" value={tourPrice} placeholder='Enter Price' onChange={e => setTourPrice(e.target.value)} />
-          <input className="duration-price__input" type="text" value={tourMaxGroupSize} placeholder='Enter Max group size' onChange={e => setTourMaxGroupSize(e.target.value)} />
-          <input className="duration-price__input" type="text" value={tourDifficulty} placeholder='Enter Difficulty' onChange={e => setTourDifficulty(e.target.value)} />
-        </div>
+        <label>Duration</label>
+        <input className="duration-price__input" type="text" value={tourDuration} placeholder='Enter Duration' onChange={e => setTourDuration(e.target.value)} />
+        <label>Price</label>
+        <input className="duration-price__input" type="text" value={tourPrice} placeholder='Enter Price' onChange={e => setTourPrice(e.target.value)} />
+        <label>Max group size</label>
+        <input className="duration-price__input" type="text" value={tourMaxGroupSize} placeholder='Enter Max group size' onChange={e => setTourMaxGroupSize(e.target.value)} />
+        <label>Difficulty</label>
+        <input className="duration-price__input" type="text" value={tourDifficulty} placeholder='Enter Difficulty' onChange={e => setTourDifficulty(e.target.value)} />
+        <label>Image cover</label>
         <input className="AddEdit-input" type="text" placeholder='Enter Image cover' value={tourImage} onChange={e => setTourImage(e.target.value)} />
         <button type="button" className="AddEdit-btn" onClick={onClick}>Save</button>
       </div>
