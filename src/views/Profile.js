@@ -101,7 +101,7 @@ const Profile = () => {
             </Link>
           </div>
 
-          <div className='your-reviews'>
+          {/* <div className='your-reviews'>
             <h3>Reviews</h3>
             <div className='Tour-Review'>
               <div className='Tour-Review__image'>
@@ -148,7 +148,7 @@ const Profile = () => {
                 </p>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
 
