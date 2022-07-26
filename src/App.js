@@ -11,6 +11,7 @@ import TourHistory from './views/TourHistory';
 import AddEditTours from './views/AddEditTours';
 import Profile from './views/Profile';
 import UpdateProfile from './views/UpdateProfile';
+import EditTour from './views/EditTour';
 
 const App = () => {
   return (
@@ -32,7 +33,9 @@ const App = () => {
         <Route path="/addTour/:id" element={<AddEditTours />} />
         <Route path="/tourHistory" element={<TourHistory />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/editTour/:id" element={<EditTour />} />
       </Routes>
+
     </div>
   );
 };
