@@ -2,7 +2,7 @@ import './AddTour.scss';
 import { useEffect, useState } from 'react'
 import axios from 'axios';
 import removeIcon from '../components/Images/remove-icon.png'
-import { duration } from 'moment';
+
 
 const AddEditTours = () => {
 
@@ -13,9 +13,9 @@ const AddEditTours = () => {
   const [tourName, setTourName] = useState('');
   const [tourSummary, setTourSummary] = useState('');
   const [tourDescription, setTourDescription] = useState('');
-  const [tourDuration, setTourDuration] = useState();
-  const [tourPrice, setTourPrice] = useState();
-  const [tourMaxGroupSize, setTourMaxGroupSize] = useState();
+  const [tourDuration, setTourDuration] = useState(0);
+  const [tourPrice, setTourPrice] = useState(0);
+  const [tourMaxGroupSize, setTourMaxGroupSize] = useState(0);
   const [tourDifficulty, setTourDifficulty] = useState('');
 
   // Tour Guide
@@ -27,11 +27,11 @@ const AddEditTours = () => {
   const [locationName, setLocationName] = useState('')
   const [startLocation, setStartLocation] = useState({})
   const [locations, setLocations] = useState([]);
-  const [latitude, setLatitude] = useState();
-  const [longitude, setLongitude] = useState();
+  const [latitude, setLatitude] = useState(0);
+  const [longitude, setLongitude] = useState(0);
   const [address, setAddress] = useState('');
   const [locDescription, setLocDescription] = useState('');
-  const [day, setDay] = useState();
+  const [day, setDay] = useState(0);
 
   // Tags
   const [tags, setTags] = useState('')
@@ -127,10 +127,10 @@ const AddEditTours = () => {
     setTourName('')
     setTourSummary('')
     setTourDescription('')
-    setTourDuration()
-    setTourPrice()
-    setTourMaxGroupSize()
-    setTourDifficulty()
+    setTourDuration(0)
+    setTourPrice(0)
+    setTourMaxGroupSize(0)
+    setTourDifficulty('')
 
     setArrTourGuide([])
     setStartLocation({})
@@ -147,8 +147,8 @@ const AddEditTours = () => {
       description: locDescription
     }
     setStartLocation(data)
-    setLatitude()
-    setLongitude()
+    setLatitude(0)
+    setLongitude(0)
     setAddress('')
     setLocDescription('')
 
@@ -163,8 +163,8 @@ const AddEditTours = () => {
       name: locationName
     }
     locations.push(data)
-    setLatitude()
-    setLongitude()
+    setLatitude(0)
+    setLongitude(0)
     setAddress('')
     setLocDescription('')
     setDay()
@@ -230,16 +230,34 @@ const AddEditTours = () => {
       <div className="AddTours">
         <div className="AddTours-container">
           <div className="Add-details container ">
+            <label>Tour Name</label>
             <input className="input-medium" type="text" placeholder='Name' value={tourName} onChange={e => setTourName(e.target.value)} />
             <div className="Add-details__inputs">
-              <input type="text" placeholder='Difficulty (e.g easy,medium,hard)' value={tourDifficulty} onChange={e => setTourDifficulty(e.target.value)} />
-              <input type="number" placeholder='Duration (e.g 5)' value={tourDuration} onChange={e => setTourDuration(e.target.value)} />
-              <input type="number" placeholder='Max group size (e.g 10)' value={tourMaxGroupSize} onChange={e => setTourMaxGroupSize(e.target.value)} />
-              <input type="number" placeholder='Price (e.g 8000)' value={tourPrice} onChange={e => setTourPrice(e.target.value)} />
+              <div>
+                <label>Difficulty</label>
+                <input type="text" placeholder='(e.g easy,medium,hard)' value={tourDifficulty} onChange={e => setTourDifficulty(e.target.value)} />
+              </div>
+              <div>
+                <label>Duration</label>
+                <input type="number" placeholder='(e.g 5)' value={tourDuration} onChange={e => setTourDuration(e.target.value)} />
+              </div>
+              <div>
+                <label>Max group size</label>
+                <input type="number" placeholder='(e.g 10)' value={tourMaxGroupSize} onChange={e => setTourMaxGroupSize(e.target.value)} />
+              </div>
+              <div>
+                <label>Price</label>
+                <input type="number" placeholder='(e.g 8000)' value={tourPrice} onChange={e => setTourPrice(e.target.value)} />
+
+              </div>
             </div>
             <div className="Add-details__textarea">
-              <div><textarea placeholder='Summary' value={tourSummary} onChange={e => setTourSummary(e.target.value)}></textarea></div>
-              <div><textarea placeholder='Description' value={tourDescription} onChange={e => setTourDescription(e.target.value)}></textarea></div>
+              <div>
+                <label>Summary</label>
+                <textarea placeholder='Summary' value={tourSummary} onChange={e => setTourSummary(e.target.value)}></textarea></div>
+              <div>
+                <label>Description</label>
+                <textarea placeholder='Description' value={tourDescription} onChange={e => setTourDescription(e.target.value)}></textarea></div>
             </div>
           </div>
           <div className="Add-images container">
@@ -341,11 +359,15 @@ const AddEditTours = () => {
             <h3>Starting location +</h3>
             <div>
               <div>
-                <input type="number" placeholder='Latitude Coordinates' value={latitude} onChange={e => setLatitude(e.target.value)} />
-                <input type="text" placeholder='Longitude Coordinates' value={longitude} onChange={e => setLongitude(e.target.value)} />
+                <label>Latitude</label>
+                <input type="number" placeholder='(e.g 121.00000)' value={latitude} onChange={e => setLatitude(e.target.value)} />
+                <label>Longitude</label>
+                <input type="text" placeholder='(e.g 12.00000)' value={longitude} onChange={e => setLongitude(e.target.value)} />
               </div>
-              <input type="text" placeholder='Address' value={address} onChange={e => setAddress(e.target.value)} />
-              <input type="text" placeholder='Description' value={locDescription} onChange={e => setLocDescription(e.target.value)} />
+              <label>Address</label>
+              <input type="text" placeholder='(e.g Laguna Calamba)' value={address} onChange={e => setAddress(e.target.value)} />
+              <label>Description</label>
+              <input type="text" placeholder='(e.g Near Island )' value={locDescription} onChange={e => setLocDescription(e.target.value)} />
               <button onClick={e => setHidden('')}> Cancel </button>
               <button onClick={addStartLocation} className="btn-startLocation"> Save </button>
             </div>
@@ -359,15 +381,20 @@ const AddEditTours = () => {
           <div className="AddModal-locations">
             <h3>Locations +</h3>
             <div>
-              <input type="text" placeholder='Location Name' value={locationName} onChange={e => setLocationName(e.target.value)} />
+              <label>Location Name</label>
+              <input type="text" placeholder='(e.g Cebu)' value={locationName} onChange={e => setLocationName(e.target.value)} />
               <div className="AddModal-coordinates">
-
-                <input type="number" placeholder='Latitude Coordinates' value={latitude} onChange={e => setLatitude(e.target.value)} />
-                <input type="text" placeholder='Longitude Coordinates' value={longitude} onChange={e => setLongitude(e.target.value)} />
+                <label>Latitude</label>
+                <input type="number" placeholder='(e.g 121.00000)' value={latitude} onChange={e => setLatitude(e.target.value)} />
+                <label>Longitude</label>
+                <input type="text" placeholder='(e.g 12.00000)' value={longitude} onChange={e => setLongitude(e.target.value)} />
               </div>
-              <input type="text" placeholder='Address' value={address} onChange={e => setAddress(e.target.value)} />
-              <input type="text" placeholder='Description' value={locDescription} onChange={e => setLocDescription(e.target.value)} />
-              <input className="days" type="number" placeholder='Day' value={day} onChange={e => setDay(e.target.value)} />
+              <label>Address</label>
+              <input type="text" placeholder='(e.g Manila)' value={address} onChange={e => setAddress(e.target.value)} />
+              <label>Description</label>
+              <input type="text" placeholder='(e.g Island Nowhere )' value={locDescription} onChange={e => setLocDescription(e.target.value)} />
+              <label>Days</label>
+              <input className="days" type="number" placeholder='(e.g 5)' value={day} onChange={e => setDay(e.target.value)} />
               <div className="AddModal-addedLocation">
                 {
                   locations && locations.map((l) => {
@@ -389,7 +416,8 @@ const AddEditTours = () => {
           <div className="AddModal-tags">
             <h3>Tags +</h3>
             <div>
-              <input type="text" placeholder='Tag name' value={tags} onChange={e => setTags(e.target.value)} />
+              <label>Tag Name</label>
+              <input type="text" placeholder='(e.g Ilocos)' value={tags} onChange={e => setTags(e.target.value)} />
               <div className="AddModal-addedTags">
                 {
                   arrTags && arrTags.map((t) => {
@@ -411,7 +439,8 @@ const AddEditTours = () => {
           <div className="AddModal-tour-guide">
             <h3>Tour guide +</h3>
             <div>
-              <input type="text" placeholder='Tour guide ID' value={tourGuide} onChange={e => setTourGuide(e.target.value)} />
+              <label>Tour Guide ID</label>
+              <input type="text" placeholder='(e.g 62de950502bb955156e1ca69)' value={tourGuide} onChange={e => setTourGuide(e.target.value)} />
               <div className="AddModal-addedTourGuide">
                 {
                   arrTourGuide && arrTourGuide.map((t) => {
