@@ -11,6 +11,72 @@ const Tour = () => {
   const [tours, setTours] = useState([]);
   const [results, setResult] = useState([]);
   const { id } = useParams();
+  const [select, setSelect] = useState();
+  const [currentLocation, setcurrentLocation] = useState();
+
+  useEffect(async ()  => {
+    const {coords: {latitude: lat, longitude: lng}} = await getMyCoords();
+    setcurrentLocation({lat,lng});
+  },[])
+
+  const getMyCoords = async () => {
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(resolve, reject);
+    });
+  };
+
+  const selectSortHandler = (e) =>{
+    setSelect(e.target.value);
+  }
+
+  const getDistanceFromLatLonInKm = (lat1,lon1,lat2,lon2) => {   
+    var R = 6371; // Radius of the earth in km   
+    var dLat = deg2rad(lat2-lat1);  
+    // deg2rad below   
+    var dLon = deg2rad(lon2-lon1);   
+    var a =   Math.sin(dLat/2) * Math.sin(dLat/2) +   Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *   Math.sin(dLon/2) * Math.sin(dLon/2);   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));   
+    var d = R * c; // Distance in km   return d;  // distance returned
+  }
+
+  const  deg2rad = (deg) => {   return deg * (Math.PI/180)}
+
+  const sortBy = (arr, select) => {
+    let arrCopy = [...arr];
+    if( select && select.startsWith("distance")){
+      arrCopy.forEach((el) =>{
+        el.distance = getDistanceFromLatLonInKm( currentLocation.lat,currentLocation.lng ,el.startLocation.coordinates[1],el.startLocation.coordinates[0]);
+      })
+      arrCopy.forEach((el) => {
+        console.log(el.distance);
+      })
+    }
+    if(select === "distance-closest" && currentLocation){
+      return arrCopy.sort((a,b) => a.distance - b.distance);
+    }
+    if(select === "distance-farthest"  && currentLocation){
+      return arrCopy.sort((a,b) => b.distance - a.distance);
+    }
+    if(select === "price-lowest"){
+      return arr;
+    }
+    if(select === "price-highest"){
+      return arr;
+    }
+    if(select === "duration-shortest"){
+      return arr;
+    }
+    if(select === "duration-longest"){
+      return arr;
+    }
+    if(select === "rating-highest"){
+      return arr;
+    }
+    if(select === "rating-lowest"){
+      return arr;
+    }
+    return arr;
+
+  }
 
   useEffect(() => {
     const getTours = async () => {
@@ -37,19 +103,31 @@ const Tour = () => {
     <>
       <Header />
       <div className="Tour">
-        {/* <div className="Tour__hero" ></div> */}
-        <div className="Tour__Title">
-          <h3>
-            {results.results} Tours Found In{" "}
-            <span>{id[0].toUpperCase() + id.substring(1)}</span>
-          </h3>
+        <div className="Tour__hero" >
+          <div className="Tour__Title">
+            <h3>
+              {results.results} Tours Found In{" "}
+              <span>{id[0].toUpperCase() + id.substring(1)}</span>
+            </h3>
+          </div>
+          <div className="filter-section">
+            <select name="filter" id="filter" onChange={selectSortHandler}>
+              <option value="distance-closest">Distance: Closest</option>
+              <option value="distance-farthest">Distance: Farthest</option>
+              <option value="price-lowest">Price: Lowest to Highest</option>
+              <option value="price-highest">Price: Highest to Lowest</option>
+              <option value="duration-shortest">Duration: Shortest</option>
+              <option value="duration-longest">Duration: Longest</option>
+              <option value="rating-highest">Rating: Highest</option>
+              <option value="rating-lowest">Rating: Lowest</option>
+            </select>
+          </div>
         </div>
 
         <div className="Tour__information">
-          <div className="filter-section">
-            <h3>Star Rating</h3>
+          
 
-            <div>
+            {/* <div>
               <input type="checkbox" value="5" />
               <label for="vehicle1"> 5 Stars</label>
               <br />
@@ -95,11 +173,10 @@ const Tour = () => {
               <input type="checkbox" value="5" />
               <label for="vehicle1"> 5km - 6km</label>
               <br />
-            </div>
-          </div>
+            </div> */}
           <div className="details-section">
             {tours &&
-              tours.map((t) => {
+              sortBy(tours,select).map((t) => {
                 return (
                   <Link to={`/tourdetails/${t.id}`}>
                     <div className="details-section__choices" key={t.id}>
