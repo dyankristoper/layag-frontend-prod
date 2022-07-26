@@ -3,7 +3,6 @@ import axios from 'axios';
 import { useParams } from 'react-router';
 import './Tours.scss';
 import Header from '../components/Header';
-import SearchBar from '../components/Home Component/SearchBar';
 import { Link } from 'react-router-dom';
 import { FaStar } from 'react-icons/fa';
 
@@ -117,60 +116,60 @@ const Tour = () => {
   return (
     <>
       <Header />
-      <div className='Tour'>
-        <div className='Tour__hero'>
-          <div className='Tour__Title'>
+      <div className="Tour">
+        <div className="Tour__hero">
+          <div className="Tour__Title">
             <h3>
               {results.results} Tours Found In{' '}
               <span>{id[0].toUpperCase() + id.substring(1)}</span>
             </h3>
           </div>
-          <div className='filter-section'>
+          <div className="filter-section">
             <select
-              name='filter'
-              id='filter'
+              name="filter"
+              id="filter"
               onChange={selectSortHandler}
               value={select}
             >
-              <option value='distance-closest'>Distance: Closest</option>
-              <option value='distance-farthest'>Distance: Farthest</option>
-              <option value='price-lowest'>Price: Lowest to Highest</option>
-              <option value='price-highest'>Price: Highest to Lowest</option>
-              <option value='duration-shortest'>Duration: Shortest</option>
-              <option value='duration-longest'>Duration: Longest</option>
-              <option value='rating-highest'>Rating: Highest</option>
-              <option value='rating-lowest'>Rating: Lowest</option>
+              <option value="distance-closest">Distance: Closest</option>
+              <option value="distance-farthest">Distance: Farthest</option>
+              <option value="price-lowest">Price: Lowest to Highest</option>
+              <option value="price-highest">Price: Highest to Lowest</option>
+              <option value="duration-shortest">Duration: Shortest</option>
+              <option value="duration-longest">Duration: Longest</option>
+              <option value="rating-highest">Rating: Highest</option>
+              <option value="rating-lowest">Rating: Lowest</option>
             </select>
           </div>
         </div>
 
-        <div className='Tour__information'>
-          <div className='details-section'>
+        <div className="Tour__information">
+          <div className="details-section">
             {tours &&
               sortBy(tours, select).map((t, i) => {
                 return (
                   <Link to={`/tourdetails/${t.id}`} key={i}>
-                    <div className='details-section__choices' key={t.id}>
-                      <div className='image'>
+                    <div className="details-section__choices" key={t.id}>
+                      <div className="image">
                         <img src={t.images[0]} alt={t.name} />
                       </div>
-                      <div className='details'>
+                      <div className="details">
                         <h3>{t.name}</h3>
 
-                        <div className='stars'>
+                        <div className="stars">
                           {[...Array(5)].map((star, i) => {
                             const ratingValue = i + 1;
                             return (
                               <div key={i}>
                                 <input
-                                  type='radio'
-                                  name='rating'
+                                  type="radio"
+                                  name="rating"
                                   value={t.ratingsAverage}
                                   readOnly
                                 />
                                 <FaStar
                                   size={25}
-                                  className='star'
+                                  className="star"
                                   color={
                                     ratingValue <= t.ratingsAverage
                                       ? '#ffc107'
@@ -181,11 +180,11 @@ const Tour = () => {
                             );
                           })}
 
-                          <span className='TourPackages-list__rate'>
+                          <span className="TourPackages-list__rate">
                             {' '}
                             {t.ratingsAverage}
                           </span>
-                          <span className='TourPackages-list__review'>
+                          <span className="TourPackages-list__review">
                             ( {t.ratingsQuantity} reviews )
                           </span>
                         </div>
@@ -193,7 +192,7 @@ const Tour = () => {
 
                         <p>{t.summary}</p>
 
-                        <h4 className='price'>Price:{t.price}</h4>
+                        <h4 className="price">Price:{t.price}</h4>
                       </div>
                     </div>
                   </Link>
