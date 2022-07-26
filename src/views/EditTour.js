@@ -1,4 +1,4 @@
-import './AddEditTours.scss';
+import './AddTour.scss';
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router';
 import axios from 'axios';
@@ -29,9 +29,9 @@ const EditTour = () => {
           });
         } else {
           response = await axios.post('http://localhost:8000/api/v1/tours', {
-          name: tourName, duration: tourDuration, maxGroupSize: tourMaxGroupSize, difficulty: tourDifficulty, price: tourPrice, summary: tourSummary, description: tourDescription, imageCover: tourImage, locations: [], startLocation: ''
-        });
-      }
+            name: tourName, duration: tourDuration, maxGroupSize: tourMaxGroupSize, difficulty: tourDifficulty, price: tourPrice, summary: tourSummary, description: tourDescription, imageCover: tourImage, locations: [], startLocation: ''
+          });
+        }
 
         console.log(response.data);
 
@@ -52,7 +52,7 @@ const EditTour = () => {
           const response = await axios.get(
             `http://localhost:8000/api/v1/tours/${id}`
           );
-            console.log(response.data.data.tour);
+          console.log(response.data.data.tour);
           if (response.data.data.tour) {
             setTourName(response.data.data.tour.name);
             setTourSummary(response.data.data.tour.summary);

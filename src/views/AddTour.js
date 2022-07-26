@@ -1,4 +1,4 @@
-import './AddEditTours.scss';
+import './AddTour.scss';
 import { useState } from 'react'
 import axios from 'axios';
 import removeIcon from '../components/Images/remove-icon.png'

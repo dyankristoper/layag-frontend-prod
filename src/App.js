@@ -8,7 +8,7 @@ import TourDetails from './views/TourDetails';
 import PrivateRoutes from './authentication/PrivateRoutes';
 import AdminRoutes from './authentication/AdminRoutes';
 import TourHistory from './views/TourHistory';
-import AddEditTours from './views/AddEditTours';
+import AddTour from './views/AddTour';
 import Profile from './views/Profile';
 import UpdateProfile from './views/UpdateProfile';
 import EditTour from './views/EditTour';
@@ -29,8 +29,8 @@ const App = () => {
           {/* <Route path='/admin/dashboard' element={AdminDashboard} /> */}
           {/* <Route path='/admin/dashboard' element={AdminDashboard} /> */}
         </Route>
-        <Route path="/addTour" element={<AddEditTours />} />
-        <Route path="/addTour/:id" element={<AddEditTours />} />
+        <Route path="/addTour" element={<AddTour />} />
+        <Route path="/addTour/:id" element={<AddTour />} />
         <Route path="/tourHistory" element={<TourHistory />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/editTour/:id" element={<EditTour />} />
