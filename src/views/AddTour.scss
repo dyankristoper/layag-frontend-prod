@@ -339,7 +339,7 @@
 
   .AddModal-locations {
     width: 20%;
-    height: 350px;
+    height: 450px;
     margin: auto;
     background-color: #3c4256;
     padding: 20px;
@@ -403,7 +403,7 @@
       }
 
       .AddModal-addedLocation {
-        height: 50px;
+        height: 120px;
         width: 92%;
         margin: 10px 10px;
         border-radius: 5px;
@@ -444,7 +444,7 @@
 
   .AddModal-tags {
     width: 20%;
-    height: 220px;
+    height: 250px;
     margin: auto;
     background-color: #3c4256;
     padding: 20px;
@@ -479,7 +479,7 @@
       }
 
       .AddModal-addedTags {
-        height: 50px;
+        height: 80px;
         width: 94%;
         margin: 10px 10px;
         background-color: rgb(126, 126, 126);
@@ -524,7 +524,7 @@
 
   .AddModal-tour-guide {
     width: 20%;
-    height: 220px;
+    height: 300px;
     margin: auto;
     background-color: #3c4256;
     padding: 20px;
@@ -559,13 +559,13 @@
       }
 
       .AddModal-addedTourGuide {
-        height: 50px;
+        height: 100px;
         width: 94%;
         margin: 10px 10px;
         background-color: rgb(126, 126, 126);
         border-radius: 5px;
-        font-size: 13px;
-        @include flex(row, wrap, none, center);
+        font-size: 10px;
+        @include flex(row, wrap, none, none);
       }
 
       button {

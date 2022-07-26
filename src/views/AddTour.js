@@ -2,6 +2,7 @@ import './AddTour.scss';
 import { useState } from 'react'
 import axios from 'axios';
 import removeIcon from '../components/Images/remove-icon.png'
+import { duration } from 'moment';
 
 const AddEditTours = () => {
 
@@ -22,6 +23,7 @@ const AddEditTours = () => {
   const [arrTourGuide, setArrTourGuide] = useState([])
 
   // Locations
+  const [locationName, setLocationName] = useState('')
   const [startLocation, setStartLocation] = useState({})
   const [locations, setLocations] = useState([]);
   const [latitude, setLatitude] = useState(0);
@@ -126,6 +128,15 @@ const AddEditTours = () => {
     setTourDescription('')
     setTourDuration(0)
     setTourPrice(0)
+    setTourMaxGroupSize(0)
+    setTourDifficulty(0)
+
+    setArrTourGuide([])
+    setStartLocation({})
+    setLocations([])
+    setArrTags([])
+    resetFieldsAndValue()
+    reset_FieldsAndValue()
   }
 
   const addStartLocation = () => {
@@ -135,6 +146,11 @@ const AddEditTours = () => {
       description: locDescription
     }
     setStartLocation(data)
+    setLatitude(0)
+    setLongitude(0)
+    setAddress('')
+    setLocDescription('')
+
 
   }
   const addLocation = () => {
@@ -142,22 +158,27 @@ const AddEditTours = () => {
       coordinates: [latitude, longitude],
       address,
       description: locDescription,
-      day
+      day,
+      name: locationName
     }
     locations.push(data)
+    setLatitude(0)
+    setLongitude(0)
+    setAddress('')
+    setLocDescription('')
+    setDay(0)
+    setLocationName('')
 
 
   }
   const addTags = () => {
     arrTags.push(tags)
+    setTags('')
 
   }
   const addTourGuide = () => {
     arrTourGuide.push(tourGuide)
-    console.log(arrTourGuide)
-    console.log(startLocation)
-    console.log(locations)
-    console.log(arrTags)
+    setTourGuide('')
   }
 
 
@@ -170,7 +191,7 @@ const AddEditTours = () => {
       try {
 
         const response = await axios.post('http://localhost:8000/api/v1/tours', {
-          name: tourName, duration: tourDuration, maxGroupSize: tourMaxGroupSize, difficulty: tourDifficulty, price: tourPrice, summary: tourSummary, description: tourDescription, imageCover: previewImageCover[0], locations, startLocation, images: previewImage
+          name: tourName, duration: tourDuration, maxGroupSize: tourMaxGroupSize, difficulty: tourDifficulty, price: tourPrice, summary: tourSummary, description: tourDescription, imageCover: previewImageCover[0], locations, startLocation, images: previewImage, tags
         });
         console.log(response.data);
       } catch (error) {
@@ -180,7 +201,9 @@ const AddEditTours = () => {
     }
 
     fetchingItems();
-    console.log(tourName, tourSummary, tourDescription, tourDuration, tourPrice, tourMaxGroupSize, tourDifficulty, arrTourGuide, startLocation, locations, arrTags, previewImageCover, previewImage,)
+    resetState();
+
+
   }
 
 
@@ -192,16 +215,16 @@ const AddEditTours = () => {
       <div className="AddTours">
         <div className="AddTours-container">
           <div className="Add-details container ">
-            <input className="input-medium" type="text" placeholder='Name' onChange={e => setTourName(e.target.value)} />
+            <input className="input-medium" type="text" placeholder='Name' value={tourName} onChange={e => setTourName(e.target.value)} />
             <div className="Add-details__inputs">
-              <input type="text" placeholder='Difficulty' onChange={e => setTourDifficulty(e.target.value)} />
-              <input type="number" placeholder='Duration' onChange={e => setTourDuration(e.target.value)} />
-              <input type="number" placeholder='Max group size' onChange={e => setTourMaxGroupSize(e.target.value)} />
-              <input type="number" placeholder='Price' onChange={e => setTourPrice(e.target.value)} />
+              <input type="text" placeholder='Difficulty' value={tourDifficulty} onChange={e => setTourDifficulty(e.target.value)} />
+              <input type="number" placeholder='Duration' value={tourDuration} onChange={e => setTourDuration(e.target.value)} />
+              <input type="number" placeholder='Max group size' value={tourMaxGroupSize} onChange={e => setTourMaxGroupSize(e.target.value)} />
+              <input type="number" placeholder='Price' value={tourPrice} onChange={e => setTourPrice(e.target.value)} />
             </div>
             <div className="Add-details__textarea">
-              <div><textarea placeholder='Summary' onChange={e => setTourSummary(e.target.value)}></textarea></div>
-              <div><textarea placeholder='Description' onChange={e => setTourDescription(e.target.value)}></textarea></div>
+              <div><textarea placeholder='Summary' value={tourSummary} onChange={e => setTourSummary(e.target.value)}></textarea></div>
+              <div><textarea placeholder='Description' value={tourDescription} onChange={e => setTourDescription(e.target.value)}></textarea></div>
             </div>
           </div>
           <div className="Add-images container">
@@ -303,11 +326,11 @@ const AddEditTours = () => {
             <h3>Starting location +</h3>
             <div>
               <div>
-                <input type="number" placeholder='Latitude Coordinates' onChange={e => setLatitude(e.target.value)} />
-                <input type="text" placeholder='Longitude Coordinates' onChange={e => setLongitude(e.target.value)} />
+                <input type="number" placeholder='Latitude Coordinates' value={latitude} onChange={e => setLatitude(e.target.value)} />
+                <input type="text" placeholder='Longitude Coordinates' value={longitude} onChange={e => setLongitude(e.target.value)} />
               </div>
-              <input type="text" placeholder='Address' onChange={e => setAddress(e.target.value)} />
-              <input type="text" placeholder='Description' onChange={e => setLocDescription(e.target.value)} />
+              <input type="text" placeholder='Address' value={address} onChange={e => setAddress(e.target.value)} />
+              <input type="text" placeholder='Description' value={locDescription} onChange={e => setLocDescription(e.target.value)} />
               <button onClick={e => setHidden('')}> Cancel </button>
               <button onClick={addStartLocation} className="btn-startLocation"> Save </button>
             </div>
@@ -321,13 +344,15 @@ const AddEditTours = () => {
           <div className="AddModal-locations">
             <h3>Locations +</h3>
             <div>
+              <input type="text" placeholder='Location Name' value={locationName} onChange={e => setLocationName(e.target.value)} />
               <div className="AddModal-coordinates">
-                <input type="number" placeholder='Latitude Coordinates' onChange={e => setLatitude(e.target.value)} />
-                <input type="text" placeholder='Longitude Coordinates' onChange={e => setLongitude(e.target.value)} />
+
+                <input type="number" placeholder='Latitude Coordinates' value={latitude} onChange={e => setLatitude(e.target.value)} />
+                <input type="text" placeholder='Longitude Coordinates' value={longitude} onChange={e => setLongitude(e.target.value)} />
               </div>
-              <input type="text" placeholder='Address' onChange={e => setAddress(e.target.value)} />
-              <input type="text" placeholder='Description' onChange={e => setLocDescription(e.target.value)} />
-              <input className="days" type="number" placeholder='Day' onChange={e => setDay(e.target.value)} />
+              <input type="text" placeholder='Address' value={address} onChange={e => setAddress(e.target.value)} />
+              <input type="text" placeholder='Description' value={locDescription} onChange={e => setLocDescription(e.target.value)} />
+              <input className="days" type="number" placeholder='Day' value={day} onChange={e => setDay(e.target.value)} />
               <div className="AddModal-addedLocation">
                 {
                   locations && locations.map((l) => {
@@ -349,7 +374,7 @@ const AddEditTours = () => {
           <div className="AddModal-tags">
             <h3>Tags +</h3>
             <div>
-              <input type="text" placeholder='Tag name' onChange={e => setTags(e.target.value)} />
+              <input type="text" placeholder='Tag name' value={tags} onChange={e => setTags(e.target.value)} />
               <div className="AddModal-addedTags">
                 {
                   arrTags && arrTags.map((t) => {
@@ -371,7 +396,7 @@ const AddEditTours = () => {
           <div className="AddModal-tour-guide">
             <h3>Tour guide +</h3>
             <div>
-              <input type="text" placeholder='Tour guide name' onChange={e => setTourGuide(e.target.value)} />
+              <input type="text" placeholder='Tour guide name' value={tourGuide} onChange={e => setTourGuide(e.target.value)} />
               <div className="AddModal-addedTourGuide">
                 {
                   arrTourGuide && arrTourGuide.map((t) => {
