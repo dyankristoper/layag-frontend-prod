@@ -1,4 +1,4 @@
-import './AddTour.scss';
+import './EditTour.scss';
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router';
 import axios from 'axios';
