@@ -12,8 +12,9 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment';
 import { Calendar } from 'react-date-range';
-import { addDays } from 'date-fns';
+import { addDays, format } from 'date-fns';
 import { isAuthenticated } from '../authentication/Authentication';
+import { FaStar } from "react-icons/fa";
 
 const TourDetails = () => {
   const [tour, setTour] = useState(null);
@@ -38,6 +39,7 @@ const TourDetails = () => {
   // const end = tour.length > 0 && tour.locations;
   // const images = tour.length > 0 && tour.images;
   const [startDate, setstartDate] = useState(new Date());
+  const [reviews, setReviews] = useState([]);
 
   const { locations, duration, images, difficulty, description } = tour || {};
 
@@ -67,6 +69,19 @@ const TourDetails = () => {
     };
     fetchItems();
   }, [id]);
+
+
+  // Review useEffect
+  useEffect(() => {
+    const getData = async () => {
+    
+        const response = await axios.get('http://localhost:8000/api/v1/reviews');
+          setReviews(response.data.data.reviews);
+          console.log(response.data.data.reviews);
+    }
+
+    getData();
+  },[])
 
   const paymentRequestHandler = async () => {
     try {
@@ -227,27 +242,61 @@ const TourDetails = () => {
         </div>
         <div className='Reviews'>
           <h3>Reviews</h3>
-          <div className='Tour-Review'>
-            <div className='Tour-Review__image'>
-              <img
-                src='https://www.musicmundial.com/en/wp-content/uploads/2022/07/BLACKPINKs-Jennie-saves-a-store-from-bankruptcy-just-by-posting-it-on-Instagram-1140x795.jpg'
-                alt='Jennie'
-              />
-            </div>
-            <div className='Tour-Review__details'>
-              <p className='Tour-Review__details__name'>Kathleen Sy</p>
-              <p className='Tour-Review__details__rating'></p>
-              <p className='Tour-Review__details__date'>23/05/2022</p>
-              <p className='Tour-Review__details__comment'>
-                Great activity. Gives you the chance to explore and learn about
-                the lesser-popular but just as beautiful attractions of Coron. I
-                recommend doing this activity along with Coron's famous water
-                attractions to get a full appreciation of the island. Our guide
-                was extremely helpful and very informative. He clearly knew what
-                he was talking about. Definitely recommend.
-              </p>
-            </div>
-          </div>
+         
+           
+
+            {
+              reviews && reviews.filter((r) => r.tour.id === id ).map((r) => {
+
+                return (
+                  <div className='Tour-Review'>
+                    <div className='Tour-Review__image'>
+                    <img
+                      src='https://www.musicmundial.com/en/wp-content/uploads/2022/07/BLACKPINKs-Jennie-saves-a-store-from-bankruptcy-just-by-posting-it-on-Instagram-1140x795.jpg'
+                      alt='Jennie'
+                    />
+                  </div>
+
+                    <div className='Tour-Review__details'>
+                      <p className='Tour-Review__details__name'>{r.user.name}</p>
+                      <p className='Tour-Review__details__rating'>
+
+                      {[...Array(5)].map((star, i) => {
+                            const ratingValue = i + 1;
+                            return (
+                              <>
+                                <input
+                                  type="radio"
+                                  name="rating"
+                                  value={r.rating}
+                                  readOnly
+                                />
+                                <FaStar
+                                  size={25}
+                                  className="star"
+                                  color={
+                                    ratingValue <= r.rating
+                                      ? "#ffc107"
+                                      : "#e4e5e9"
+                                  }
+                                />
+                              </>
+                            );
+                          })}
+
+                      </p>
+                      <p className='Tour-Review__details__date'>{format(new Date(r.createdAt), "MM/dd/yy")}</p>
+                      <p className='Tour-Review__details__comment'>
+                        {r.review}
+                      </p>
+                    </div>
+                    </div>
+                  
+                )
+              })
+
+            }
+          
         </div>
       </div>
     </>
