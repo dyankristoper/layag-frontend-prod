@@ -1,20 +1,21 @@
 import './AddTour.scss';
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios';
 import removeIcon from '../components/Images/remove-icon.png'
 import { duration } from 'moment';
 
 const AddEditTours = () => {
 
-  // const [tourId, setTourId] = useState(null);
+  const [modal, setModal] = useState(false)
+  const [spinner, setSpinner] = useState(false)
 
   // Details
   const [tourName, setTourName] = useState('');
   const [tourSummary, setTourSummary] = useState('');
   const [tourDescription, setTourDescription] = useState('');
-  const [tourDuration, setTourDuration] = useState(0);
-  const [tourPrice, setTourPrice] = useState(0);
-  const [tourMaxGroupSize, setTourMaxGroupSize] = useState(0);
+  const [tourDuration, setTourDuration] = useState();
+  const [tourPrice, setTourPrice] = useState();
+  const [tourMaxGroupSize, setTourMaxGroupSize] = useState();
   const [tourDifficulty, setTourDifficulty] = useState('');
 
   // Tour Guide
@@ -26,11 +27,11 @@ const AddEditTours = () => {
   const [locationName, setLocationName] = useState('')
   const [startLocation, setStartLocation] = useState({})
   const [locations, setLocations] = useState([]);
-  const [latitude, setLatitude] = useState(0);
-  const [longitude, setLongitude] = useState(0);
+  const [latitude, setLatitude] = useState();
+  const [longitude, setLongitude] = useState();
   const [address, setAddress] = useState('');
   const [locDescription, setLocDescription] = useState('');
-  const [day, setDay] = useState(0);
+  const [day, setDay] = useState();
 
   // Tags
   const [tags, setTags] = useState('')
@@ -126,10 +127,10 @@ const AddEditTours = () => {
     setTourName('')
     setTourSummary('')
     setTourDescription('')
-    setTourDuration(0)
-    setTourPrice(0)
-    setTourMaxGroupSize(0)
-    setTourDifficulty(0)
+    setTourDuration()
+    setTourPrice()
+    setTourMaxGroupSize()
+    setTourDifficulty()
 
     setArrTourGuide([])
     setStartLocation({})
@@ -146,8 +147,8 @@ const AddEditTours = () => {
       description: locDescription
     }
     setStartLocation(data)
-    setLatitude(0)
-    setLongitude(0)
+    setLatitude()
+    setLongitude()
     setAddress('')
     setLocDescription('')
 
@@ -162,11 +163,11 @@ const AddEditTours = () => {
       name: locationName
     }
     locations.push(data)
-    setLatitude(0)
-    setLongitude(0)
+    setLatitude()
+    setLongitude()
     setAddress('')
     setLocDescription('')
-    setDay(0)
+    setDay()
     setLocationName('')
 
 
@@ -191,7 +192,7 @@ const AddEditTours = () => {
       try {
 
         const response = await axios.post('http://localhost:8000/api/v1/tours', {
-          name: tourName, duration: tourDuration, maxGroupSize: tourMaxGroupSize, difficulty: tourDifficulty, price: tourPrice, summary: tourSummary, description: tourDescription, imageCover: previewImageCover[0], locations, startLocation, images: previewImage, tags
+          name: tourName, duration: tourDuration, maxGroupSize: tourMaxGroupSize, difficulty: tourDifficulty, price: tourPrice, summary: tourSummary, description: tourDescription, imageCover: previewImageCover[0], locations, startLocation, images: previewImage, tags, guides: arrTourGuide
         });
         console.log(response.data);
       } catch (error) {
@@ -202,9 +203,23 @@ const AddEditTours = () => {
 
     fetchingItems();
     resetState();
+    setSpinner(spinner => !spinner)
+    setModal(modal => !modal)
 
 
   }
+
+  useEffect(() => {
+
+    if (modal == true) {
+      setSpinner(false)
+      setTimeout(() => {
+        setModal(false)
+      }, 3000);
+    }
+  }, [modal])
+
+
 
 
 
@@ -217,10 +232,10 @@ const AddEditTours = () => {
           <div className="Add-details container ">
             <input className="input-medium" type="text" placeholder='Name' value={tourName} onChange={e => setTourName(e.target.value)} />
             <div className="Add-details__inputs">
-              <input type="text" placeholder='Difficulty' value={tourDifficulty} onChange={e => setTourDifficulty(e.target.value)} />
-              <input type="number" placeholder='Duration' value={tourDuration} onChange={e => setTourDuration(e.target.value)} />
-              <input type="number" placeholder='Max group size' value={tourMaxGroupSize} onChange={e => setTourMaxGroupSize(e.target.value)} />
-              <input type="number" placeholder='Price' value={tourPrice} onChange={e => setTourPrice(e.target.value)} />
+              <input type="text" placeholder='Difficulty (e.g easy,medium,hard)' value={tourDifficulty} onChange={e => setTourDifficulty(e.target.value)} />
+              <input type="number" placeholder='Duration (e.g 5)' value={tourDuration} onChange={e => setTourDuration(e.target.value)} />
+              <input type="number" placeholder='Max group size (e.g 10)' value={tourMaxGroupSize} onChange={e => setTourMaxGroupSize(e.target.value)} />
+              <input type="number" placeholder='Price (e.g 8000)' value={tourPrice} onChange={e => setTourPrice(e.target.value)} />
             </div>
             <div className="Add-details__textarea">
               <div><textarea placeholder='Summary' value={tourSummary} onChange={e => setTourSummary(e.target.value)}></textarea></div>
@@ -396,7 +411,7 @@ const AddEditTours = () => {
           <div className="AddModal-tour-guide">
             <h3>Tour guide +</h3>
             <div>
-              <input type="text" placeholder='Tour guide name' value={tourGuide} onChange={e => setTourGuide(e.target.value)} />
+              <input type="text" placeholder='Tour guide ID' value={tourGuide} onChange={e => setTourGuide(e.target.value)} />
               <div className="AddModal-addedTourGuide">
                 {
                   arrTourGuide && arrTourGuide.map((t) => {
@@ -411,6 +426,20 @@ const AddEditTours = () => {
           </div>
         </div>
       }
+
+      {
+        modal === true &&
+        <div className="success-modal">
+          <div >
+            <p>Tour added Successfully</p>
+          </div>
+        </div>
+      }
+
+      {/* {
+        spinner === true &&
+        <div class="lds-hourglass"></div>
+      } */}
     </>
   )
 }
