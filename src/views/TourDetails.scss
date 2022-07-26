@@ -160,7 +160,7 @@
     .Tour-Review {
       padding: 20px;
       margin-top: 50px;
-      @include flex(row, nowrap, center, center);
+      @include flex(row, nowrap, flex-start, center);
       border: 1px solid rgb(223, 222, 222);
       border-top: .1px;
       box-shadow: 2px 3px rgba(221, 221, 221, 0.849);
@@ -185,7 +185,12 @@
           font-weight: bolder;
         }
 
-        &__rating {}
+        &__rating {
+          
+          & input[type="radio"] {
+            display: none;
+        }
+        }
 
         &__date {
           font-size: 10px;
