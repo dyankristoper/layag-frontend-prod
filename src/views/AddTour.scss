@@ -1,0 +1,595 @@
+@import '../components/global';
+
+
+
+.AddTours {
+  width: 60%;
+  margin: 75px auto;
+  background-color: #2a313f;
+  height: 80vh;
+  padding-top: 50px;
+
+
+  &-container {
+    width: 100%;
+    background-color: #3b4052;
+    height: 90%;
+    @include flex(row, nowrap, none, none);
+
+
+    .container {
+      width: 50%;
+      padding: 20px;
+
+    }
+
+    .Add-details {
+
+      input {
+        width: 320px;
+        margin-left: 30px;
+        display: inline-block;
+        border-radius: 2px;
+        border: none;
+        outline: none;
+        height: 30px;
+        padding-left: 10px;
+        margin-top: 40px;
+        font-family: $primary-font;
+        background-color: #323747;
+        color: white
+      }
+
+      input:hover {
+        background-color: rgb(214, 214, 214);
+        transition: .3s;
+      }
+
+      .Add-details__inputs {
+        @include flex(row, wrap, center, center);
+        margin-top: 40px;
+
+        input {
+          width: 220px;
+          margin: 20px;
+          border-radius: 2px;
+          border: none;
+          outline: none;
+          height: 30px;
+          padding-left: 10px;
+          font-family: $primary-font;
+        }
+      }
+
+      .Add-details__textarea {
+        @include flex(row, nowrap, space-evenly, center);
+
+        margin-top: 50px;
+
+
+        textarea {
+          width: 230px;
+          height: 220px;
+          resize: none;
+          padding: 20px;
+          border-radius: 8px;
+          border: none;
+          outline: none;
+          font-family: $primary-font;
+          background-color: #323747;
+          color: white;
+
+
+        }
+
+        textarea:hover {
+          background-color: rgb(214, 214, 214);
+          transition: .3s;
+
+        }
+      }
+    }
+
+    .Add-images {
+
+
+      &__input {
+
+        height: 40px;
+        margin-top: 40px;
+
+
+        input {
+          cursor: pointer;
+          font-family: $primary-font;
+        }
+      }
+
+      &__display {
+        width: 100%;
+        height: 250px;
+
+        padding: 20px;
+        overflow: hidden;
+        font-family: $primary-font;
+
+        @include flex(row, wrap, none, none);
+
+        .image-list {
+          list-style: none;
+          margin-right: 10px;
+
+
+          img {
+            width: 100px;
+            height: 100px;
+          }
+
+          button {
+            background-color: transparent;
+            border: none;
+            position: absolute;
+            cursor: pointer;
+
+            img {
+              width: 20px;
+              height: 20px;
+
+            }
+          }
+        }
+      }
+
+      &__btns {
+        @include flex(row, nowrap, none, none);
+        margin-top: 40px;
+        font-family: $primary-font;
+
+
+        .Add-image-imageCover {
+          width: 60%;
+
+          height: 200px;
+
+          .Add-image-imageCover {
+            height: 40px;
+
+            width: 100%;
+
+            input {
+              cursor: pointer;
+              font-family: $primary-font;
+            }
+          }
+
+          .Add-imagecover-display {
+            padding: 20px;
+            overflow: hidden;
+
+            li {
+              list-style: none;
+
+              img {
+
+                width: 100px;
+                height: 100px;
+
+              }
+
+              button {
+                background-color: transparent;
+                border: none;
+                position: absolute;
+                cursor: pointer;
+
+
+                img {
+                  width: 20px;
+                  height: 20px;
+
+                }
+              }
+            }
+
+          }
+        }
+
+        .Add-images-btns {
+
+          width: 40%;
+
+          button {
+            width: 200px;
+            height: 40px;
+            margin-bottom: 10px;
+            margin-left: 15px;
+            font-family: $primary-font;
+            background-color: #2B65EC;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+          }
+
+          button:hover {
+            background-color: gray;
+            transition: .3s;
+          }
+        }
+      }
+    }
+
+
+  }
+
+  .AddEdit-btnSave {
+    width: 100px;
+    height: 30px;
+    margin: 15px 50px;
+    font-family: $primary-font;
+    background-color: #2B65EC;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .AddEdit-btnSave:hover {
+    background-color: gray;
+    transition: .3s;
+  }
+}
+
+.AddModal {
+  background-color: rgba(128, 128, 128, 0.884);
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+
+  .AddModal-startLocation {
+    width: 20%;
+    height: 240px;
+    margin: auto;
+    background-color: #3c4256;
+    padding: 20px;
+    color: white;
+    border-radius: 10px;
+    font-family: $primary-font;
+    position: fixed;
+    top: 25%;
+    left: 40%;
+
+
+    div {
+      padding: 5px;
+      background-color: #3d4355;
+      line-height: 40px;
+
+      div {
+        input {
+          width: 150px;
+          height: 30px;
+          font-family: $primary-font;
+          padding-left: 5px;
+          outline: none;
+          border-radius: 5px;
+          border: none;
+          background-color: #323747;
+          color: white;
+          margin-left: 5px;
+
+        }
+
+        input:hover {
+          background-color: white;
+          transition: .3s;
+        }
+
+      }
+
+      input {
+        width: 306px;
+        height: 30px;
+        font-family: $primary-font;
+        padding-left: 5px;
+        outline: none;
+        border-radius: 5px;
+        border: none;
+        background-color: #323747;
+        color: white;
+        margin-left: 10px;
+
+      }
+
+      input:hover {
+        background-color: white;
+        transition: .3s;
+      }
+
+      button {
+        width: 120px;
+        height: 30px;
+        font-family: $primary-font;
+        background-color: #2B65EC;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        margin: 15px 0 0 10px;
+
+      }
+
+      button:hover {
+        background-color: gray;
+        transition: .3s;
+      }
+
+      .btn-startLocation {
+        margin-left: 65px;
+      }
+    }
+
+  }
+}
+
+.AddModal {
+  background-color: rgba(128, 128, 128, 0.884);
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+
+  .AddModal-locations {
+    width: 20%;
+    height: 350px;
+    margin: auto;
+    background-color: #3c4256;
+    padding: 20px;
+    color: white;
+    border-radius: 10px;
+    font-family: $primary-font;
+    position: fixed;
+    top: 25%;
+    left: 40%;
+
+    div {
+      padding: 5px;
+      background-color: #3d4355;
+      line-height: 40px;
+
+      .AddModal-coordinates {
+        input {
+          width: 150px;
+          height: 30px;
+          font-family: $primary-font;
+          padding-left: 5px;
+          outline: none;
+          border-radius: 5px;
+          border: none;
+          background-color: #323747;
+          color: white;
+          margin-left: 5px;
+
+        }
+
+        input:hover {
+          background-color: rgb(214, 214, 214);
+          transition: .3s;
+        }
+
+      }
+
+      input {
+        width: 306px;
+        height: 30px;
+        font-family: $primary-font;
+        padding-left: 5px;
+        outline: none;
+        border-radius: 5px;
+        border: none;
+        background-color: #323747;
+        color: white;
+        margin-left: 10px;
+
+      }
+
+      input:hover {
+        background-color: rgb(214, 214, 214);
+        transition: .3s;
+      }
+
+      .days {
+        width: 120px;
+        display: block;
+        margin-top: 5px;
+      }
+
+      .AddModal-addedLocation {
+        height: 50px;
+        width: 92%;
+        margin: 10px 10px;
+        border-radius: 5px;
+        background-color: rgb(126, 126, 126);
+        font-size: 13px;
+
+        @include flex(row, wrap, none, center);
+
+      }
+
+      button {
+        width: 120px;
+        height: 30px;
+        font-family: $primary-font;
+        background-color: #2B65EC;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        margin: 15px 0 0 10px;
+
+      }
+
+      button:hover {
+        background-color: gray;
+        transition: .3s;
+      }
+
+      .btn-addLocation {
+        margin-left: 63px;
+      }
+
+    }
+  }
+}
+
+.AddModal {
+
+
+  .AddModal-tags {
+    width: 20%;
+    height: 220px;
+    margin: auto;
+    background-color: #3c4256;
+    padding: 20px;
+    color: white;
+    border-radius: 10px;
+    font-family: $primary-font;
+    line-height: 30px;
+    position: fixed;
+    top: 25%;
+    left: 40%;
+
+    div {
+      padding: 8px;
+      background-color: #3d4355;
+
+      input {
+        width: 306px;
+        height: 30px;
+        font-family: $primary-font;
+        padding-left: 5px;
+        outline: none;
+        border-radius: 5px;
+        border: none;
+        background-color: #323747;
+        color: white;
+        margin-left: 10px;
+      }
+
+      input:hover {
+        background-color: rgb(214, 214, 214);
+        transition: .3s;
+      }
+
+      .AddModal-addedTags {
+        height: 50px;
+        width: 94%;
+        margin: 10px 10px;
+        background-color: rgb(126, 126, 126);
+        border-radius: 5px;
+        font-size: 13px;
+
+        @include flex(row, wrap, none, center);
+      }
+
+      button {
+        width: 120px;
+        height: 30px;
+        font-family: $primary-font;
+        background-color: #2B65EC;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        margin: 15px 0 0 10px;
+
+      }
+
+      button:hover {
+        background-color: gray;
+        transition: .3s;
+      }
+
+      .btn-addTags {
+        margin-left: 63px;
+      }
+
+    }
+
+  }
+}
+
+.AddModal {
+  background-color: rgba(128, 128, 128, 0.884);
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+
+  .AddModal-tour-guide {
+    width: 20%;
+    height: 220px;
+    margin: auto;
+    background-color: #3c4256;
+    padding: 20px;
+    color: white;
+    border-radius: 10px;
+    font-family: $primary-font;
+    line-height: 30px;
+    position: fixed;
+    top: 25%;
+    left: 40%;
+
+    div {
+      padding: 8px;
+      background-color: #3d4355;
+
+      input {
+        width: 306px;
+        height: 30px;
+        font-family: $primary-font;
+        padding-left: 5px;
+        outline: none;
+        border-radius: 5px;
+        border: none;
+        background-color: #323747;
+        color: whitez;
+        margin-left: 10px;
+      }
+
+      input:hover {
+        background-color: white;
+        transition: .3s;
+      }
+
+      .AddModal-addedTourGuide {
+        height: 50px;
+        width: 94%;
+        margin: 10px 10px;
+        background-color: rgb(126, 126, 126);
+        border-radius: 5px;
+        font-size: 13px;
+        @include flex(row, wrap, none, center);
+      }
+
+      button {
+        width: 120px;
+        height: 30px;
+        font-family: $primary-font;
+        background-color: #2B65EC;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        margin: 15px 0 0 10px;
+
+      }
+
+      button:hover {
+        background-color: gray;
+        transition: .3s;
+      }
+
+      .btn-addTourGuide {
+        margin-left: 63px;
+      }
+
+    }
+
+  }
+}
