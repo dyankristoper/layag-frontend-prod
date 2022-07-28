@@ -191,7 +191,7 @@ const AddEditTours = () => {
 
       try {
 
-        const response = await axios.post('http://localhost:8000/api/v1/tours', {
+        const response = await axios.post('https://layag-traveltours-be.herokuapp.com/api/v1/tours', {
           name: tourName, duration: tourDuration, maxGroupSize: tourMaxGroupSize, difficulty: tourDifficulty, price: tourPrice, summary: tourSummary, description: tourDescription, imageCover: previewImageCover[0], locations, startLocation, images: previewImage, tags, guides: arrTourGuide
         });
         console.log(response.data);

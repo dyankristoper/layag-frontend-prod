@@ -23,8 +23,8 @@ const Rating = ({onChange, userBooking, userID}) => {
       booking: tourDetails._id
     }
     if(rating && review){
-    axios.post("http://localhost:8000/api/v1/reviews", addData).then((response) => {
-      return axios.patch(`http://localhost:8000/api/v1/bookings/${tourDetails._id}`, {isReviewed : true})
+    axios.post("https://layag-traveltours-be.herokuapp.com/api/v1/reviews", addData).then((response) => {
+      return axios.patch(`https://layag-traveltours-be.herokuapp.com/api/v1/bookings/${tourDetails._id}`, {isReviewed : true})
     }).then((response) => {
       console.log(response);
     })

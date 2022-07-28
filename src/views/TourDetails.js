@@ -52,7 +52,7 @@ const TourDetails = () => {
           data: {
             data: { tour },
           },
-        } = await axios.get(`http://localhost:8000/api/v1/tours/${id}`);
+        } = await axios.get(`https://layag-traveltours-be.herokuapp.com/api/v1/tours/${id}`);
         setTour(tour);
         // setTour(response.data.data.tour)
         // const start = response.data.data.tour.locations[0].name;
@@ -75,7 +75,7 @@ const TourDetails = () => {
   useEffect(() => {
     const getData = async () => {
     
-        const response = await axios.get('http://localhost:8000/api/v1/reviews');
+        const response = await axios.get('https://layag-traveltours-be.herokuapp.com/api/v1/reviews');
           setReviews(response.data.data.reviews);
           console.log(response.data.data.reviews);
     }
@@ -96,7 +96,7 @@ const TourDetails = () => {
       console.log(tourStartFormatted, tourEndFormatted);
 
       const response = await axios.post(
-        `http://localhost:8000/api/v1/bookings/payments`,
+        `https://layag-traveltours-be.herokuapp.com/api/v1/bookings/payments`,
         {
           user,
           tour,

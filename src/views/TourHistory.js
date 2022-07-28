@@ -14,7 +14,7 @@ const TourHistory = () => {
     const getTours = async () => {
       try {
         const getData = await axios.get(
-          `http://localhost:8000/api/v1/tours`
+          `https://layag-traveltours-be.herokuapp.com/api/v1/tours`
         );     
         setTours(getData.data.data.tours);   
 
@@ -26,7 +26,7 @@ const TourHistory = () => {
   }, []);
 
   const deleteHandler = async (id) => {
-     await axios.delete(`http://localhost:8000/api/v1/tours/${id}`);
+     await axios.delete(`https://layag-traveltours-be.herokuapp.com/api/v1/tours/${id}`);
    const updatedData = tours.filter((t) => t.id !== id);
    setTours(updatedData);
    setMessage('Item Successfully Deleted');

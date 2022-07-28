@@ -26,7 +26,7 @@ const Profile = () => {
   const getData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/api/v1/bookings/my-bookings/${_id}?sort=-createdAt`
+        `https://layag-traveltours-be.herokuapp.com/api/v1/bookings/my-bookings/${_id}?sort=-createdAt`
       );
       setuserTour(response.data.data.bookings);
       console.log(response.data.data.bookings);

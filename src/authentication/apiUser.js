@@ -1,7 +1,7 @@
 // http://localhost:8000/api/v1
 
 export const read = (userId, token) => {
-  return fetch(`http://localhost:8000/api/v1/user/${userId}`, {
+  return fetch(`https://layag-traveltours-be.herokuapp.com/api/v1/user/${userId}`, {
     method: 'GET',
     headers: {
       Accept: 'application/json',
@@ -16,7 +16,7 @@ export const read = (userId, token) => {
 };
 
 export const update = (userId, token, user) => {
-  return fetch(`http://localhost:8000/api/v1/user/${userId}`, {
+  return fetch(`https://layag-traveltours-be.herokuapp.com/api/v1/user/${userId}`, {
     method: 'PUT',
     headers: {
       Accept: 'application/json',
